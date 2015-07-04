@@ -19,9 +19,10 @@ Knock-Out NGS data.
 * bedtools >= 2.23.0
 
 ## Presetting
-Make sure to do this presetting carefully. 
+Make sure to do this presetting carefully. Because reference setting
+is **very important**.
 
-For the sake of simplicity, we use hg19 as the reference genome.
+For the sake of simplicity, we use hg19 as the example.
 
 1. Download the hg19 genome(fasta file) from UCSC, put it in some
    directory, name it `hg19.fa` and set the directory path as
