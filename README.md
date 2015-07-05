@@ -24,13 +24,13 @@ is **very important**.
 
 For the sake of simplicity, we use hg19 as the example.
 
-1. Download the hg19 genome(fasta file) from UCSC, put it in the same
+1. Download the hg19 genome(fasta file) from UCSC, put it in certain
    directory, name it `hg19.fa` and set the directory path as
    `$FASTADB`.
    
 2. Download the hg19 gene annotation files from UCSC, convert it to
    `bed-6` format with the 4th column being the gene name, put them in
-   the same directory and set the directory path as `$BEDDB`. Here are the
+   certain directory and set the directory path as `$BEDDB`. Here are the
    renamed file:
 >>
 File | Standard | Requirement
@@ -39,7 +39,7 @@ hg19ref.bed | Refseq |required
 hg19ucsc.bed | UCSC Gene | optional
 hg19gencode.bed | GENCODE | optional
 
-3. Generate `bwa` index files from `hg19.fa`, put them in the same directory
+3. Generate `bwa` index files from `hg19.fa`, put them in certain directory
    and set the directory path as `$BWADB`.
 
 ## Installation
