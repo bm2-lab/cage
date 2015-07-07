@@ -42,7 +42,9 @@ def LassoFeatureSelection(str_f_seq, str_f_iost, str_of_fesrep, cv=10, niter=100
         l1r2 = l1r2._replace(under=np.hstack((l1r2.under, func_score(cvt.ytr, lr.predict(cvt.xtr)))), over=np.hstack((l1r2.over, func_score(cvt.yte, lr.predict(cvt.xte)))))
     lmn = (l1r2.under.mean(), l1r2.over.mean())
 
-    lst_fs = [i for i in dfm_x[columns]]
+    int_ups = int(dfm_x.columns[1].split('_')[1])
+    int_dws = int(dfm_x.columns[-1].split('_')[1])
+    lst_fs = [i for i in dfm_x.columns[columns]]
     f_fesrep = open(str_of_fesrep, 'w')
     enode_root = etree.Element('report')
     enode_fes =etree.SubElement(enode_root, 'features')
@@ -50,6 +52,8 @@ def LassoFeatureSelection(str_f_seq, str_f_iost, str_of_fesrep, cv=10, niter=100
     for fs in lst_fs:
         enode_fes.append(etree.Element(fs))
     enode_fes.set('n', str(len(lst_fs)))
+    enode_fes.set('ups', str(int_ups))
+    enode_fes.set('dws', str(int_dws))
     enode_cv.set('n_iter', str(niter))
     enode_cv.set('fold', str(cv))
     enode_cv.set('r2', str(round(lmn[1], 3)))

@@ -98,7 +98,7 @@ def AnalyzeIndel(opts):
     str_path_seq = os.path.join(opts.tdir, str_nm + '.seq')
     str_path_fesrep = os.path.join(opts.tdir, str_nm + '_fesrep.xml')
     print('Integrating Indel information...')
-    indel.AnalyzeSamind(str_path_samind, str_path_iost)
+    indel.AnalyzeSamind(str_path_samind, str_path_iost, opts.cut)
     print('Done')
     print('Extracting sequence feature...')
     indel.ExtractSeqFeature(opts.sg, opts.ref, str_path_seq, opts.ups, opts.dws)
@@ -188,6 +188,7 @@ CRISPR-Cas9 Knock-Out NGS data.
     
     ind_par = p_ind.add_argument_group('Parameter options')
     ind_par.add_argument('-g', '--reference', dest='ref', required=True, help='Reference Genome (required)')
+    ind_par.add_argument('-t', '--cutoff', dest='cut', help='Cutoff of Reads (default = 0)', default=0, type=int)
     ind_par.add_argument('-u', '--ups', dest='ups', help='Upstream Region Length (default = 35)', default=35, type=int)
     ind_par.add_argument('-w', '--dws', dest='dws', help='Downstream Region Length (default = 32)', default=32, type=int)
 

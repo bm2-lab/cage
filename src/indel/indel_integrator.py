@@ -3,7 +3,7 @@ from __future__ import division
 import numpy as np
 import pandas as pd
 
-def AnalyzeSamind(str_f_samind, str_of_iost):
+def AnalyzeSamind(str_f_samind, str_of_iost, int_cutoff=0):
     dfm_samind = pd.read_csv(str_f_samind, sep='\t', header=None)
     dfm_samind.columns = ['readID', 'batchID', 'chrom', 'sbeg', 'send', 'sgID', 'sgstrand', 'gene', 'sgbeg', 'sgend', 'sgseq', 'c_site', 'CIGAR', 'idtype', 'idbeg', 'idend', 'idlen', 'fm_status', 'factor', 'count', 'freq']
 
@@ -28,6 +28,7 @@ def AnalyzeSamind(str_f_samind, str_of_iost):
                                           r_reffect=x.otf.sum()/(x.inf.sum()+x.otf.sum()) if x.inf.sum()+x.otf.sum()!=0 else 0,
                                           r_effect=x.otf.sum()/x.allrc.sum() if x.allrc.sum()!=0 else 0))
     dfm_iost = dfm_iost.groupby(['sgID'], group_keys=False).apply(func_io).reset_index(drop=True).reindex(columns=['sgID', 'allrc', 'none', 'inf', 'otf', 'r_ind', 'r_reffect', 'r_effect'])
+    dfm_iost = dfm_iost.ix[dfm_iost.allrc>=int_cutoff, ]
     dfm_iost = dfm_iost.sort_index(by=['r_effect'], ascending=[False])
      
     dfm_iost.to_csv(str_of_iost, sep='\t', index=None)

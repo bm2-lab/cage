@@ -11,7 +11,9 @@ def __ParseFsRep(str_f_fesrep):
     enode_root = etree_fes.getroot()
     enode_fes = enode_root[0]
     lst_fs = [ed.tag for ed in enode_fes]
-    return lst_fs
+    int_ups = int(enode_fes.get('ups'))
+    int_dws = int(enode_fes.get('dws'))
+    return (lst_fs, int_ups, int_dws)
 
 def __ParseFs(lst_fs):
     dict_nt = dict(A=1, C=2, G=3, T=4)
@@ -79,8 +81,8 @@ def __ParseFs(lst_fs):
                pam=Cord(cord=lst_pam_cord, tick=lst_pam_tick),
                dws=Cord(cord=lst_dws_cord, tick=lst_dws_tick))
             
-def VisualizeFeature(str_f_fesrep, str_of_lax,flt_ampfct=1.00):
-    lst_fs = __ParseFsRep(str_f_fesrep)
+def VisualizeFeature(str_f_fesrep, str_of_lax, flt_ampfct=1.00):
+    lst_fs, int_ups, int_dws = __ParseFsRep(str_f_fesrep)
     fsc = __ParseFs(lst_fs)
     func_mat = lambda x: r'\rowzero' if x==0 else (r'\rowone' if x==1 else r'\row{%d}'%x)
     lst_lax = []
@@ -282,10 +284,10 @@ def VisualizeFeature(str_f_fesrep, str_of_lax,flt_ampfct=1.00):
     %%let \tmp = \tmpbx - \tmpax;
     let \tmp = 420pt;
     \bups = (\cinit);
-    \bspa = (\bups) + \fct*35/90*(\tmp,0);
+    \bspa = (\bups) + \fct*%d/90*(\tmp,0);
     \bpam = (\bspa) + \fct*20/90*(\tmp,0);
     \bdws = (\bpam) + \fct*3/90*(\tmp,0);
-    \edws = (\bdws) + \fct*32/90*(\tmp,0);
+    \edws = (\bdws) + \fct*%d/90*(\tmp,0);
     coordinate \cmid;
     \cmid = 1/2*(\bups) + 1/2*(\edws);
     let \dtmp = \tmpmx - \cmidx;
@@ -299,13 +301,13 @@ def VisualizeFeature(str_f_fesrep, str_of_lax,flt_ampfct=1.00):
   \tikzstyle{axlb1}=[midway, above=3ex, sloped]
   \tikzstyle{axlb2}=[midway, above=0.5ex, sloped]
   \draw[line,blue] (\bups) -- (\bspa)
-  node[axlb1] {Upstream}  node[axlb2] {35nt};
+  node[axlb1] {Upstream}  node[axlb2] {%dnt};
   \draw[line,red] (\bspa) -- (\bpam)
   node[axlb1] {Spacer} node[axlb2] {20nt};
   \draw[line,orange] (\bpam) -- (\bdws)
   node[axlb1] {PAM} node[axlb2] {3nt};
   \draw[line,cyan] (\bdws) -- (\edws)
-  node[axlb1] {Downstream} node[axlb2] {32nt};
+  node[axlb1] {Downstream} node[axlb2] {%dnt};
 
   \tikzstyle{dline}=[dotted,thick]
   %s
@@ -314,7 +316,7 @@ def VisualizeFeature(str_f_fesrep, str_of_lax,flt_ampfct=1.00):
   %s
 \end{tikzpicture}
 \end{document}
-'''% (str_ups_line, str_spa_line, str_pam_line, str_dws_line)
+'''% (int_ups, int_dws, int_ups, int_dws, str_ups_line, str_spa_line, str_pam_line, str_dws_line)
     lst_lax.append(str_suf)
     f_lax = open(str_of_lax, 'w')
     f_lax.write('\n'.join(lst_lax))
