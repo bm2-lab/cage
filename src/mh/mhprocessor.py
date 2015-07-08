@@ -73,7 +73,7 @@ def ProcessMh(str_f_samind, str_refgem, str_of_mh):
     f_mh.close()
 
 
-def AnalyzeMh(str_f_mh, str_of_mnst):
+def AnalyzeMh(str_f_mh, str_of_mnst, int_cutoff=0):
     dfm_mh = pd.read_csv(str_f_mh, sep='\t', header=None)
     dfm_mh.columns = ['readID', 'batchID', 'chrom', 'sbeg', 'send', 'sgID', 'sgstrand', 'gene', 'sgbeg', 'sgend', 'sgseq', 'c_site', 'CIGAR', 'idtype', 'idbeg', 'idend', 'idlen', 'fm_status', 'factor', 'count', 'freq', 'premhseq', 'mhtype', 'mhlen', 'mhseq']
 
@@ -106,7 +106,8 @@ def AnalyzeMh(str_f_mh, str_of_mnst):
                                           r_mh=x.mh.sum()/x.allind.sum(),
                                           r_mmej=x.MMEJ.sum()/x.allind.sum()))
     dfm_mnst = dfm_mnst.groupby(['sgID'], group_keys=False).apply(func_mn).reset_index(drop=True).reindex(columns=['sgID', 'allind', 'inf', 'otf', 'mh', 'mh_inf', 'nonmh_inf', 'mh_otf', 'nonmh_otf', 'NHEJ', 'MMEJ', 'r_mh', 'r_mmej'])
-
+    dfm_mnst = dfm_mnst.ix[dfm_mnst.allind>=int_cutoff, ]
+    
     func_idp_test = lambda x: fisher_exact(np.array([[x.mh_otf, x.mh_inf], [x.nonmh_otf, x.nonmh_inf]]))[1] if np.any(np.array([[x.mh_otf, x.mh_inf], [x.nonmh_otf, x.nonmh_inf]]) < 5) else chi2_contingency(np.array([[x.mh_otf, x.mh_inf], [x.nonmh_otf, x.nonmh_inf]]))[1] 
     dfm_mnst['pv_mh_fs'] = dfm_mnst.apply(func_idp_test, axis=1)
     

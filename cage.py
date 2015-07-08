@@ -87,7 +87,7 @@ def DetectMh(opts):
     mh.ProcessMh(str_path_samind, opts.ref, str_path_mh)
     print('Done')
     print('Analyzing microhomology...')
-    mh.AnalyzeMh(str_path_mh, str_path_mnst)
+    mh.AnalyzeMh(str_path_mh, str_path_mnst, opts.cut)
     print('Done')
 
 def AnalyzeIndel(opts):
@@ -95,17 +95,23 @@ def AnalyzeIndel(opts):
     str_path_proj = opts.tdir
     str_path_samind = opts.samind
     str_path_iost = os.path.join(opts.tdir, str_nm + '.iost')
+    str_path_iosg = os.path.join(opts.tdir, str_nm + '.iosg')
     str_path_seq = os.path.join(opts.tdir, str_nm + '.seq')
     str_path_fesrep = os.path.join(opts.tdir, str_nm + '_fesrep.xml')
     print('Integrating Indel information...')
-    indel.AnalyzeSamind(str_path_samind, str_path_iost, opts.cut)
+    indel.AnalyzeSamind(str_path_samind, opts.sg, str_path_iost, str_path_iosg, opts.cut)
     print('Done')
-    print('Extracting sequence feature...')
-    indel.ExtractSeqFeature(opts.sg, opts.ref, str_path_seq, opts.ups, opts.dws)
-    print('Done')
-    print('Selecting sequence feature...')
-    indel.LassoFeatureSelection(str_path_seq, str_path_iost, str_path_fesrep, opts.cv, opts.niter)
-    print('Done')
+    if opts.auto == False:
+        print('Extracting sequence feature...')
+        indel.ExtractSeqFeature(str_path_iosg, opts.ref, str_path_seq, opts.ups, opts.dws)
+        print('Done')
+        print('Selecting sequence feature...')
+        indel.LassoFeatureSelection(str_path_seq, str_path_iost, str_path_fesrep, opts.cv, opts.niter)
+        print('Done')
+    else:
+        print('Detecting Optimal Feature Space...')
+        indel.FeatureSelection(str_path_iosg, str_path_iost, opts.ref, str_path_seq, str_path_fesrep, opts.ir, opts.ir+opts.rad, opts.step, opts.cv, opts.niter)
+        print('Done')
 
 def Visualize(opts):
     str_path_proj = opts.tdir
@@ -174,6 +180,7 @@ CRISPR-Cas9 Knock-Out NGS data.
     mh_otp.add_argument('-d', '--target-dir', dest='tdir', help='Target Directory, default = .', default='.')
     mh_par = p_mh.add_argument_group('Parameter options')
     mh_par.add_argument('-g', '--reference', dest='ref', required=True, help='Reference Genome (required)')
+    mh_par.add_argument('-t', '--cutoff', dest='cut', help='Cutoff of Reads (default = 0)', default=0, type=int)
     
     p_ind = sp.add_parser('indel',
                           description='Lasso for Indel Frameshifting Paradigm',
@@ -189,12 +196,16 @@ CRISPR-Cas9 Knock-Out NGS data.
     ind_par = p_ind.add_argument_group('Parameter options')
     ind_par.add_argument('-g', '--reference', dest='ref', required=True, help='Reference Genome (required)')
     ind_par.add_argument('-t', '--cutoff', dest='cut', help='Cutoff of Reads (default = 0)', default=0, type=int)
+    ind_par.add_argument('-a', '--auto', dest='auto', action='store_true', help='Auto Detection for Sequence Region')
+    ind_par.add_argument('--ir', dest='ir', help='Detection Region Init Radius (default = 0)', default=0, type=int)
+    ind_par.add_argument('-r', '--radius', dest='rad', help='Detection Region Radius (default = 200)', default=200, type=int)
+    ind_par.add_argument('--step', dest='step', help='Detection Step (default = 5)', default=5, type=int)
     ind_par.add_argument('-u', '--ups', dest='ups', help='Upstream Region Length (default = 35)', default=35, type=int)
     ind_par.add_argument('-w', '--dws', dest='dws', help='Downstream Region Length (default = 32)', default=32, type=int)
 
     ind_las = p_ind.add_argument_group('Feature Selection options')
-    ind_las.add_argument('-c', '--cv', dest='cv', help='Folds for Cross Validation (default = 10)', default=10, type=int)
-    ind_las.add_argument('-n', '--niter', dest='niter', help='Iteration Times for Cross Validation (default = 3000)', default=3000, type=int)
+    ind_las.add_argument('-c', '--cv', dest='cv', help='Folds for Cross Validation (default = 5)', default=5, type=int)
+    ind_las.add_argument('-n', '--niter', dest='niter', help='Iteration Times for Cross Validation (default = 1000)', default=1000, type=int)
 
     p_vis = sp.add_parser('vis',
                           description='Result Visualization',

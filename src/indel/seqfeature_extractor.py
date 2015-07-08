@@ -44,7 +44,7 @@ def __FormulateFeature(lst_sg, fa_ref, dict_code, int_ups, int_dws):
 
     lst_sgtab = [lst_sg[idx_sgid]]
     str_strand = '1' if lst_sg[idx_strand] == '+' else '0'
-    lst_sgtab.append(str_strand)
+    #lst_sgtab.append(str_strand)
     str_ups =''
     str_dws = ''
 
@@ -71,17 +71,18 @@ def __FormulateFeature(lst_sg, fa_ref, dict_code, int_ups, int_dws):
     
     
 
-def ExtractSeqFeature(str_f_sg, str_refgem, str_of_sgtab, int_ups=30, int_dws=27):
+def ExtractSeqFeature(str_f_sg, str_refgem, str_of_seq, int_ups=30, int_dws=27):
     f_sg = open(str_f_sg, 'r')
     gn_sg = (str_sg.strip().split('\t') for str_sg in f_sg if str_sg.strip() != '')
-    f_sgtab = open(str_of_sgtab, 'w')
+    f_sgtab = open(str_of_seq, 'w')
 
     str_refpath = '%s/%s.fa'% (os.environ['FASTADB'], str_refgem)
     fa_ref = Fasta(str_refpath)
     dict_code = dict(N=['0','0','0','0'], A=['1','0','0','0'], C=['0','1','0','0'], G=['0','0','1','0'], T=['0','0','0','1'])
     lst_code = ['A', 'C', 'G', 'T']
     lst_sgtab = []
-    lst_header = ['sgID', 'strand']
+    #lst_header = ['sgID', 'strand']
+    lst_header = ['sgID']
     lst_header.extend(['ups_%d_%s'% (i, j) for i in range(int_ups, 0, -1) for j in lst_code])
     lst_header.extend(['spa_%d_%s'% (i, j) for i in range(1, 21) for j in lst_code])
     lst_header.extend(['pam_%d_%s'% (i, j) for i in range(1, 4) for j in lst_code])
