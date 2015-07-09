@@ -7,10 +7,10 @@ from scipy.stats import fisher_exact
 from scipy.stats import chi2_contingency
 
 def __DetectMh(lst_pmh):
-    idx_csite = 11
-    idx_idbeg = 14
-    idx_idend = 15
-    idx_mhseq = 21
+    idx_csite = 10
+    idx_idbeg = 13
+    idx_idend = 14
+    idx_mhseq = 20
     
     str_mhtype = ""
     int_mhlen = 0
@@ -50,10 +50,10 @@ def ProcessMh(str_f_samind, str_refgem, str_of_mh):
 
     gn_samind = (str_line.strip().split('\t') for str_line in f_samind if str_line.strip() != '')
     idx_chr = 2
-    idx_idtype = 13
-    idx_idbeg = 14
-    idx_idend = 15
-    idx_idlen = 16
+    idx_idtype = 12
+    idx_idbeg = 13
+    idx_idend = 14
+    idx_idlen = 15
     gn_pmh = (lst_samind for lst_samind in gn_samind if lst_samind[idx_idtype] == 'sdel')
 
     str_refpath = '%s/%s.fa'% (os.environ['FASTADB'], str_refgem)
@@ -75,7 +75,7 @@ def ProcessMh(str_f_samind, str_refgem, str_of_mh):
 
 def AnalyzeMh(str_f_mh, str_of_mnst, int_cutoff=0):
     dfm_mh = pd.read_csv(str_f_mh, sep='\t', header=None)
-    dfm_mh.columns = ['readID', 'batchID', 'chrom', 'sbeg', 'send', 'sgID', 'sgstrand', 'gene', 'sgbeg', 'sgend', 'sgseq', 'c_site', 'CIGAR', 'idtype', 'idbeg', 'idend', 'idlen', 'fm_status', 'factor', 'count', 'freq', 'premhseq', 'mhtype', 'mhlen', 'mhseq']
+    dfm_mh.columns = ['readID', 'batchID', 'chrom', 'sbeg', 'send', 'sgID', 'sgstrand', 'sgbeg', 'sgend', 'sgseq', 'c_site', 'CIGAR', 'idtype', 'idbeg', 'idend', 'idlen', 'fm_status', 'factor', 'count', 'freq', 'premhseq', 'mhtype', 'mhlen', 'mhseq']
 
     func_mh = lambda x: pd.DataFrame(dict(batchID=x.batchID.unique(),
                                           sgID=x.sgID.unique(),

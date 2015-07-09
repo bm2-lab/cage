@@ -1,4 +1,3 @@
 from fqmapper import *
-from sgprocessor import *
 from samprocessor import *
-
+from interface_prep import *

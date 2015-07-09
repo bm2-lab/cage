@@ -27,8 +27,11 @@ For the sake of simplicity, we use hg19 as the example.
 1. Download the hg19 genome(fasta file) from UCSC, put it in certain
    directory, name it `hg19.fa` and set the directory path as
    `$FASTADB`.
+
+2. Generate `bwa` index files from `hg19.fa`, put them in certain directory
+   and set the directory path as `$BWADB`.
    
-2. Download the hg19 gene annotation files from UCSC, convert it to
+3. (Optional) Download the hg19 gene annotation files from UCSC, convert it to
    `bed-6` format with the 4th column being the gene name, put them in
    certain directory and set the directory path as `$BEDDB`. Here are the
    renamed file:
@@ -39,8 +42,7 @@ hg19ref.bed | Refseq |required
 hg19ucsc.bed | UCSC Gene | optional
 hg19gencode.bed | GENCODE | optional
 
-3. Generate `bwa` index files from `hg19.fa`, put them in certain directory
-   and set the directory path as `$BWADB`.
+
 
 ## Installation
 ```
@@ -53,15 +55,25 @@ python cage.py <command> [option] ...
 ```
 
 ## Command
-1. `prep` for preprocessing
-2. `mh` for microhomology detection
-3. `indel` for indel frameshifting paradigm using **LASSO**
-4. `vis` for result visualization
+1. `sg` for sgRNA processing
+2. `prep` for preprocessing
+3. `mh` for microhomology detection
+4. `indel` for indel frameshifting paradigm using **LASSO**
+5. `vis` for result visualization
 
-## Preprocess
+## sgRNA Processing
+```bash
+python cage.py sg -s <sgRNA.fq>
+	              -d <target directory>
+                  -g <reference genome>
+				  -t <bwa threads>
+```
+For more detail on the options, see `python cage.py sg -h`.
+
+## Preprocessing
 * Single-end
 ```bash
-python cage.py prep -s <sgRNA.fq>
+python cage.py prep -s <sg file>
 	                -f <reads.fq>
 	                -d <target directory>
                     -g <reference genome>
@@ -70,7 +82,7 @@ python cage.py prep -s <sgRNA.fq>
 
 * Paired-end
 ```bash
-python cage.py prep -s <sgRNA.fq>
+python cage.py prep -s <sg file>
                     -f <reads_1.fq>
 					-r <reads_2.fq>
 					-d <target directory>

@@ -5,10 +5,10 @@ import pandas as pd
 
 def AnalyzeSamind(str_f_samind, str_f_sg, str_of_iost, str_of_iosg, int_cutoff=0):
     dfm_samind = pd.read_csv(str_f_samind, sep='\t', header=None)
-    dfm_samind.columns = ['readID', 'batchID', 'chrom', 'sbeg', 'send', 'sgID', 'sgstrand', 'gene', 'sgbeg', 'sgend', 'sgseq', 'c_site', 'CIGAR', 'idtype', 'idbeg', 'idend', 'idlen', 'fm_status', 'factor', 'count', 'freq']
+    dfm_samind.columns = ['readID', 'batchID', 'chrom', 'sbeg', 'send', 'sgID', 'sgstrand', 'sgbeg', 'sgend', 'sgseq', 'c_site', 'CIGAR', 'idtype', 'idbeg', 'idend', 'idlen', 'fm_status', 'factor', 'count', 'freq']
 
     dfm_sg = pd.read_csv(str_f_sg, header=None, index_col=None, sep='\t')
-    dfm_sg.columns = ['sgID', 'chrom', 'strand', 'gene', 'sbeg', 'send', 'qseq', 'c_site']
+    dfm_sg.columns = ['sgID', 'chrom', 'strand', 'sbeg', 'send', 'qseq', 'c_site']
 
     func_samind = lambda x: pd.DataFrame(dict(batchID=x.batchID.unique(),
                                            sgID=x.sgID.unique(),

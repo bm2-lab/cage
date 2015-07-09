@@ -16,7 +16,7 @@ def __ReadSgtable(str_f_sg):
     
     idx_sgid = 0
     idx_chr = 1
-    idx_csite = 7
+    idx_csite = 6
     for lst_sg in gn_sg:
         dict_sg[lst_sg[idx_sgid]] = [lst_sg[idx_sgid]] + lst_sg[2:]
         if lst_sg[1] in dict_chr.keys():
@@ -258,10 +258,10 @@ def ProcessSam(str_f_sam, str_f_sg, str_of_samind, bln_pair=True,
                int_idloffset=20, int_idroffset=20, int_loffset=0, int_roffset=0):
     idx_chr = 2
     idx_sgid = 5
-    idx_idtype = 13
-    idx_idbeg = 14
-    idx_idlen = 16
-    idx_factor = 18
+    idx_idtype = 12
+    idx_idbeg = 13
+    idx_idlen = 15
+    idx_factor = 17
 
     gn_lst_psamind = __IntegrateSg(str_f_sam, str_f_sg, bln_pair, int_idloffset, int_idroffset, int_loffset, int_roffset)
     gn_lst_samind = __Dedupe(gn_lst_psamind, key=lambda lst_psamind: (lst_psamind[idx_chr], lst_psamind[idx_sgid], lst_psamind[idx_idtype], lst_psamind[idx_idbeg], lst_psamind[idx_idlen], lst_psamind[idx_factor]))
