@@ -59,7 +59,8 @@ python cage.py <command> [option] ...
 2. `prep` for preprocessing
 3. `mh` for microhomology detection
 4. `indel` for indel frameshifting paradigm using **LASSO**
-5. `vis` for result visualization
+5. `las` for general data source using **LASSO**
+6. `vis` for result visualization
 
 ## sgRNA Processing
 ```bash
@@ -107,6 +108,15 @@ python cage.py indel -i <samind file>
 	                 -g <reference genome>
 ```
 For more detail on the options, see `python cage.py indel -h`.
+
+## General Lasso Feature Selection
+```bash
+python cage.py las -i <label file>
+                   -s <sg file>
+                   -d <target directory>
+	               -g <reference genome>
+```
+For more detail on the options, see `python cage.py las -h`.
 
 ## Visualization
 ```bash

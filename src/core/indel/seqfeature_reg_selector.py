@@ -34,9 +34,9 @@ def LassoFeatureSelection(str_f_iosg, str_f_iost, str_refgem,
     dfm_x.to_csv(str_of_seq, sep='\t', index=None)
     dfm_y = pd.read_csv(str_f_iost, sep='\t', index_col=None)
     dfm_y = dfm_y[[0,-1]]
-    dfm_y = pd.merge(dfm_y, dfm_x, on='sgID')
-    dfm_x = dfm_y.ix[:, 2:]
-    dfm_y = dfm_y[[1]]
+    dfm_y = pd.merge(dfm_x, dfm_y, on='sgID')
+    dfm_x = dfm_y.ix[:, 1:-1]
+    dfm_y = dfm_y[[-1]]
 
     x = np.array(dfm_x, dtype=np.double)
     y = np.array(dfm_y, dtype=np.double)
@@ -60,18 +60,18 @@ def LassoRegionOptimizer(str_f_iosg, str_f_iost, str_refgem,
     dfm_iost = dfm_iost[[0,-1]]
     for (i,(int_ups, int_dws)) in enumerate(zip(int_ups_regn, int_dws_regn)):
         dfm_x = ExtractSeqFeature(str_f_iosg, str_refgem, int_ups, int_dws)
-        dfm_y = pd.merge(dfm_iost, dfm_x, on='sgID')
-        dfm_x = dfm_y.ix[:, 2:]
-        dfm_y = dfm_y[[1]]
+        dfm_y = pd.merge(dfm_x, dfm_iost, on='sgID')
+        dfm_x = dfm_y.ix[:, 1:-1]
+        dfm_y = dfm_y[[-1]]
         x = np.array(dfm_x, dtype=np.double)
         y = np.array(dfm_y, dtype=np.double)
         arr_r2[i] = ml.LassoSelector(x, y, cv, niter).r2
     int_ups = int_ups_regn[arr_r2.argmax()]
     int_dws = int_dws_regn[arr_r2.argmax()]
     dfm_x = ExtractSeqFeature(str_f_iosg, str_refgem, int_ups, int_dws)
-    dfm_y = pd.merge(dfm_iost, dfm_x, on='sgID')
-    dfm_x = dfm_y.ix[:, 2:]
-    dfm_y = dfm_y[[1]]
+    dfm_y = pd.merge(dfm_x, dfm_iost, on='sgID')
+    dfm_x = dfm_y.ix[:, 1:-1]
+    dfm_y = dfm_y[[-1]]
     x = np.array(dfm_x, dtype=np.double)
     y = np.array(dfm_y, dtype=np.double)
     md = ml.LassoSelector(x, y, cv, niter)

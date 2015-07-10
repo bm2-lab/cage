@@ -32,7 +32,6 @@ def AnalyzeSamind(str_f_samind, str_f_sg, str_of_iost, str_of_iosg, int_cutoff=0
                                           r_effect=x.otf.sum()/x.allrc.sum() if x.allrc.sum()!=0 else 0))
     dfm_iost = dfm_iost.groupby(['sgID'], group_keys=False).apply(func_io).reset_index(drop=True).reindex(columns=['sgID', 'allrc', 'none', 'inf', 'otf', 'r_ind', 'r_reffect', 'r_effect'])
     dfm_iost = dfm_iost.ix[dfm_iost.allrc>=int_cutoff, ]
-    dfm_iost = dfm_iost.sort_index(by=['r_effect'], ascending=[False])
     dfm_iost.to_csv(str_of_iost, sep='\t', index=None)
 
     dfm_sg = pd.merge(dfm_sg, dfm_iost[['sgID']], on='sgID')

@@ -43,11 +43,17 @@ CRISPR-Cas9 Knock-Out NGS data.
     ui.ParseMh(p_mh)
     
     p_ind = sp.add_parser('indel',
-                          description='Lasso for Indel Frameshifting Paradigm',
+                          description='Seq-Feature Selection on Indel Frameshifting Paradigm',
                           usage='cage indel [options]',
-                          help='Indel Feature Selection')
+                          help='Seq-Feature Selection on Indel Frameshifting Paradigm')
     ui.ParseInd(p_ind)
-
+    
+    p_las = sp.add_parser('las',
+                          description='Seq-Feature Selection on General Data Source',
+                          usage='cage las [options]',
+                          help='Seq-Feature Selection on General Data Source')
+    ui.ParseLas(p_las)
+    
     p_vis = sp.add_parser('vis',
                           description='Result Visualization',
                           usage='cage vis [options]',
@@ -66,6 +72,8 @@ CRISPR-Cas9 Knock-Out NGS data.
             p_mh.print_help()
         elif sys.argv[1] == 'indel':
             p_ind.print_help()
+        elif sys.argv[1] == 'las':
+            p_las.print_help()
         elif sys.argv[1] == 'vis':
             p_vis.print_help()
         sys.exit(1)
@@ -93,6 +101,9 @@ CRISPR-Cas9 Knock-Out NGS data.
     elif sys.argv[1] == 'indel':
         from src.core import indel
         indel.AnalyzeIndel(opts)
+    elif sys.argv[1] == 'las':
+        from src.core import las
+        las.GeneralLas(opts)
     elif sys.argv[1] == 'vis':
         from src.core import vis
         vis.Visualize(opts)
