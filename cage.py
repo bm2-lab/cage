@@ -48,11 +48,11 @@ CRISPR-Cas9 Knock-Out NGS data.
                           help='Seq-Feature Selection on Indel Frameshifting Paradigm')
     ui.ParseInd(p_ind)
     
-    p_las = sp.add_parser('las',
+    p_fs = sp.add_parser('fs',
                           description='Seq-Feature Selection on General Data Source',
-                          usage='cage las [options]',
+                          usage='cage fs [options]',
                           help='Seq-Feature Selection on General Data Source')
-    ui.ParseLas(p_las)
+    ui.ParseFs(p_fs)
     
     p_vis = sp.add_parser('vis',
                           description='Result Visualization',
@@ -72,8 +72,8 @@ CRISPR-Cas9 Knock-Out NGS data.
             p_mh.print_help()
         elif sys.argv[1] == 'indel':
             p_ind.print_help()
-        elif sys.argv[1] == 'las':
-            p_las.print_help()
+        elif sys.argv[1] == 'fs':
+            p_fs.print_help()
         elif sys.argv[1] == 'vis':
             p_vis.print_help()
         sys.exit(1)
@@ -88,7 +88,7 @@ CRISPR-Cas9 Knock-Out NGS data.
 
     if not os.path.exists(opts.tdir):
             print('Target Directory not find, create one.')
-            os.mkdir(opts.tdir)
+            os.makedirs(opts.tdir)
     if sys.argv[1] == 'sg':
         from src.core import sg
         sg.ProcessSg(p, opts)        
@@ -101,9 +101,9 @@ CRISPR-Cas9 Knock-Out NGS data.
     elif sys.argv[1] == 'indel':
         from src.core import indel
         indel.AnalyzeIndel(opts)
-    elif sys.argv[1] == 'las':
-        from src.core import las
-        las.GeneralLas(opts)
+    elif sys.argv[1] == 'fs':
+        from src.core import fs
+        fs.GeneralFs(opts)
     elif sys.argv[1] == 'vis':
         from src.core import vis
         vis.Visualize(opts)

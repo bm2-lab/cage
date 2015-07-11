@@ -109,14 +109,15 @@ python cage.py indel -i <samind file>
 ```
 For more detail on the options, see `python cage.py indel -h`.
 
-## General Lasso Feature Selection
+## General Feature Selection
 ```bash
-python cage.py las -i <label file>
-                   -s <sg file>
-                   -d <target directory>
-	               -g <reference genome>
+python cage.py fs -i <label file>
+                  -s <sg file>
+                  -d <target directory>
+	              -g <reference genome>
+				  -m <lasso|logit>
 ```
-For more detail on the options, see `python cage.py las -h`.
+For more detail on the options, see `python cage.py fs -h`.
 
 ## Visualization
 ```bash
