@@ -127,6 +127,7 @@ python cage.py eval -s <sg file>
                     -o <output directory>
 					-g <reference genome>
 ```
+For more detail on the options, see `python cage.py eval -h`.
 
 ## Visualization
 ```bash
