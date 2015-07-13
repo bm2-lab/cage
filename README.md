@@ -120,6 +120,14 @@ python cage.py fs -i <label file>
 ```
 For more detail on the options, see `python cage.py fs -h`.
 
+## sgRNA Evaluation
+```bash
+python cage.py eval -s <sg file>
+                    -f <score function file>
+                    -o<output directory>
+					-g <reference genome>
+```
+
 ## Visualization
 ```bash
 python cage.py vis -f <feature report file>
