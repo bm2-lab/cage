@@ -23,16 +23,17 @@ def AnalyzeIndel(opts):
     print('Done')
     if opts.auto == False:
         print('Selecting sequence feature...')
-        seqfs.LassoFeatureSelection(str_path_iosg, str_path_iost, opts.ref, 
-                              str_path_seq, str_path_fesrep, str_path_model,
-                              opts.ups, opts.dws, opts.cv, opts.niter)
+        seqfs.LassoFeatureSelection(str_path_iosg, str_path_iost, opts.ref,
+                                    str_path_seq, str_path_fesrep,
+                                    str_path_model, opts.ups, opts.dws,
+                                    opts.cv, opts.niter, opts.njob)
         print('Done')
     else:
         print('Detecting Optimal Feature Space...')
         seqfs.LassoRegionOptimizer(str_path_iosg, str_path_iost, opts.ref,
-                             str_path_seq, str_path_fesrep, str_path_model,
-                             opts.ir, opts.ir+opts.rad, opts.step,
-                             opts.cv, opts.niter)
+                                   str_path_seq, str_path_fesrep,
+                                   str_path_model, opts.ir, opts.ir+opts.rad,
+                                   opts.step, opts.cv, opts.niter, opts.njob)
         print('Done')
 
 

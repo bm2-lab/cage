@@ -6,7 +6,7 @@ def ParseInd(p_ind):
     ind_inp.add_argument('-s', '--sg', dest='sg', required=True, help='sgRNA Information File (required)')
 
     ind_otp = p_ind.add_argument_group('Output options')
-    ind_otp.add_argument('-d', '--target-dir', dest='tdir', help='Target Directory, default = .', default='.')
+    ind_otp.add_argument('-o', '--output-dir', dest='tdir', help='Output Directory, default = .', default='.')
     
     ind_par = p_ind.add_argument_group('Parameter options')
     ind_par.add_argument('-g', '--reference', dest='ref', required=True, help='Reference Genome (required)')
@@ -21,6 +21,7 @@ def ParseInd(p_ind):
     ind_las = p_ind.add_argument_group('Feature Selection options')
     ind_las.add_argument('-c', '--cv', dest='cv', help='Folds for Cross Validation (default = 5)', default=5, type=int)
     ind_las.add_argument('-n', '--niter', dest='niter', help='Iteration Times for Cross Validation (default = 1000)', default=1000, type=int)
+    ind_las.add_argument('-j', '--jobs', dest='njob', help='Number of CPU cores used (default = 1; -1 means all cores)', default=1, type=int)
 
 
 

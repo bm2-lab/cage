@@ -55,17 +55,18 @@ python cage.py <command> [option] ...
 ```
 
 ## Command
-1. `sg` for sgRNA processing
-2. `prep` for preprocessing
-3. `mh` for microhomology detection
-4. `indel` for indel frameshifting paradigm using **LASSO**
-5. `las` for general data source using **LASSO**
-6. `vis` for result visualization
+1. `sg`    Process sgRNA sequences into sgRNA information table
+2. `prep`  Process raw sequence data into sgRNA-Indel Table
+3. `mh`    Microhomology Detection
+4. `indel` Seq-Feature Selection on Indel Frameshifting Paradigm
+5. `fs`    Seq-Feature Selection on General Data Source
+6. `eval`  sgRNA Evaluation
+7. `vis`   Result Visualization
 
 ## sgRNA Processing
 ```bash
 python cage.py sg -s <sgRNA.fq>
-	              -d <target directory>
+	              -o <output directory>
                   -g <reference genome>
 				  -t <bwa threads>
 ```
@@ -76,7 +77,7 @@ For more detail on the options, see `python cage.py sg -h`.
 ```bash
 python cage.py prep -s <sg file>
 	                -f <reads.fq>
-	                -d <target directory>
+	                -o <output directory>
                     -g <reference genome>
 					-t <bwa threads>
 ```
@@ -86,7 +87,7 @@ python cage.py prep -s <sg file>
 python cage.py prep -s <sg file>
                     -f <reads_1.fq>
 					-r <reads_2.fq>
-					-d <target directory>
+					-o <output directory>
 					-g <reference genome>
 					-t <bwa threads>
 ```
@@ -95,7 +96,7 @@ For more detail on the options, see `python cage.py prep -h`.
 ## Microhomology Detection
 ```bash
 python cage.py mh -i <samind file>
-                  -d <target directory>
+                  -o <output directory>
 	              -g <reference genome>
 ```
 For more detail on the options, see `python cage.py mh -h`.
@@ -104,7 +105,7 @@ For more detail on the options, see `python cage.py mh -h`.
 ```bash
 python cage.py indel -i <samind file>
                      -s <sg file>
-                     -d <target directory>
+                     -o <output directory>
 	                 -g <reference genome>
 ```
 For more detail on the options, see `python cage.py indel -h`.
@@ -113,7 +114,7 @@ For more detail on the options, see `python cage.py indel -h`.
 ```bash
 python cage.py fs -i <label file>
                   -s <sg file>
-                  -d <target directory>
+                  -o <output directory>
 	              -g <reference genome>
 				  -m <lasso|logit>
 ```
@@ -122,6 +123,6 @@ For more detail on the options, see `python cage.py fs -h`.
 ## Visualization
 ```bash
 python cage.py vis -f <feature report file>
-                   -d <target directory>
+                   -o <output directory>
 ```
 For more detail on the options, see `python cage.py vis -h`.				

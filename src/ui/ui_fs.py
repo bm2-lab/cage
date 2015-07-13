@@ -6,7 +6,7 @@ def ParseFs(p_fs):
     fs_inp.add_argument('-s', '--sg', dest='sg', required=True, help='sgRNA Information File (required)')
 
     fs_otp = p_fs.add_argument_group('Output options')
-    fs_otp.add_argument('-d', '--target-dir', dest='tdir', help='Target Directory, default = .', default='.')
+    fs_otp.add_argument('-o', '--output-dir', dest='tdir', help='Output Directory, default = .', default='.')
     
     fs_par = p_fs.add_argument_group('Parameter options')
     fs_par.add_argument('-g', '--reference', dest='ref', required=True, help='Reference Genome (required)')

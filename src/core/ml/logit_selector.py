@@ -52,7 +52,7 @@ def LogitSelector(x, y, cv, niter, njob):
         au.append(__Auc(cls, cvt.xte, cvt.yte))
 
     cls.fit(x[:,columns], y)
-    return Mdc(model=cls.coef_, idx=columns, accu=np.mean(accu),
+    return Mdc(model=cls, idx=columns, accu=np.mean(accu),
                prec=np.mean(prec), rec=np.mean(rec), f1=np.mean(f1),
                au=np.mean(au))
 

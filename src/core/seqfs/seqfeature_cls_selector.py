@@ -8,7 +8,7 @@ from src.core import ml
 
 
 
-Frc = namedtuple('Frc', ['fs', 'ups', 'dws', 'niter', 'cv', 'accu', 'prec', 'rec', 'f1', 'au'])
+Frc = namedtuple('Frc', ['fs', 'idx', 'ups', 'dws', 'niter', 'cv', 'accu', 'prec', 'rec', 'f1', 'au'])
 
 def __SaveFeatureReport(frc, str_of_fesrep):
     f_fesrep = open(str_of_fesrep, 'w')
@@ -16,7 +16,7 @@ def __SaveFeatureReport(frc, str_of_fesrep):
     enode_fes =etree.SubElement(enode_root, 'features')
     enode_cv = etree.SubElement(enode_root, 'cross_validation')
     enode_met = etree.SubElement(enode_cv, 'metric')
-    for fs in frc.fs:
+    for (fs, idx) in zip(frc.fs, frc.idx):
         enode_fes.append(etree.Element(fs))
     enode_fes.set('method', 'logit')
     enode_fes.set('n', str(len(frc.fs)))
@@ -54,11 +54,13 @@ def LogitFeatureSelection(str_f_iosg, str_f_st, str_refgem,
 
     mdc = ml.LogitSelector(x, y, cv, niter, njob)
     lst_fs = [i for i in dfm_x.columns[mdc.idx]]
-    frc = Frc(fs=lst_fs, ups=int_ups, dws=int_dws, niter=niter, cv=cv,
-              accu=mdc.accu, prec=mdc.prec, rec=mdc.rec,
+    frc = Frc(fs=lst_fs, idx=mdc.idx, ups=int_ups, dws=int_dws, niter=niter,
+              cv=cv, accu=mdc.accu, prec=mdc.prec, rec=mdc.rec,
               f1=mdc.f1, au=mdc.au)
     __SaveFeatureReport(frc, str_of_fesrep)
-    ml.SaveModel(mdc.model, str_of_md)
+    mdlc = dict(med='logit', model=mdc.model, idx=mdc.idx,
+                ups=int_ups, dws=int_dws)
+    ml.SaveModel(mdlc, str_of_md)
 
 
 
@@ -89,10 +91,12 @@ def LogitRegionOptimizer(str_f_iosg, str_f_st, str_refgem,
     y = np.array(dfm_y, dtype=np.int)
     mdc = ml.LogitSelector(x, y, cv, niter, njob)
     lst_fs = [i for i in dfm_x.columns[mdc.idx]]
-    frc = Frc(fs=lst_fs, ups=int_ups, dws=int_dws, niter=niter, cv=cv,
-              accu=mdc.accu, prec=mdc.prec, rec=mdc.rec,
+    frc = Frc(fs=lst_fs, idx=mdc.idx, ups=int_ups, dws=int_dws, niter=niter,
+              cv=cv, accu=mdc.accu, prec=mdc.prec, rec=mdc.rec,
               f1=mdc.f1, au=mdc.au)
     __SaveFeatureReport(frc, str_of_fesrep)
-    ml.SaveModel(mdc.model, str_of_md)
+    mdlc = dict(med='logit', model=mdc.model, idx=mdc.idx,
+                ups=int_ups, dws=int_dws)
+    ml.SaveModel(mdlc, str_of_md)
     
 

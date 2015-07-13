@@ -6,7 +6,7 @@ from src import ui
 def main():
     
     str_prog = 'CAGE'
-    str_usage = 'cage <command> [options]'
+    str_usage = 'python cage.py <command> [options]'
     str_desc = r'''
 CRISPR KO Analysis based on Genomic Editing data
 ------------------------------------------------
@@ -25,38 +25,44 @@ CRISPR-Cas9 Knock-Out NGS data.
 
     p_sg = sp.add_parser('sg',
                          description='Process sgRNA sequences into sgRNA information table',
-                         usage='cage sg [options]',
+                         usage='python cage.py sg [options]',
                          help='Processing sgRNA')
     ui.ParseSg(p_sg)
     
     p_prep = sp.add_parser('prep',
                            description='Process raw sequence data into sgRNA-Indel Table',
-                           usage='cage prep [options]',
+                           usage='python cage.py prep [options]',
                            help='Processing raw reads')
 
     ui.ParsePrep(p_prep)
 
     p_mh = sp.add_parser('mh',
                          description='Microhomology Detection',
-                         usage='cage mh [options]',
+                         usage='python cage.py mh [options]',
                          help='Microhomology Detection')
     ui.ParseMh(p_mh)
     
     p_ind = sp.add_parser('indel',
                           description='Seq-Feature Selection on Indel Frameshifting Paradigm',
-                          usage='cage indel [options]',
+                          usage='python cage.py indel [options]',
                           help='Seq-Feature Selection on Indel Frameshifting Paradigm')
     ui.ParseInd(p_ind)
     
     p_fs = sp.add_parser('fs',
                           description='Seq-Feature Selection on General Data Source',
-                          usage='cage fs [options]',
+                          usage='python cage.py fs [options]',
                           help='Seq-Feature Selection on General Data Source')
     ui.ParseFs(p_fs)
+
+    p_ev = sp.add_parser('eval',
+                         description='sgRNA Evaluation',
+                         usage='python cage.py eval [options]',
+                         help='sgRNA Evaluation')
+    ui.ParseEval(p_ev)
     
     p_vis = sp.add_parser('vis',
                           description='Result Visualization',
-                          usage='cage vis [options]',
+                          usage='python cage.py vis [options]',
                           help='Result Visualization')
     ui.ParseVis(p_vis)
 
@@ -74,6 +80,8 @@ CRISPR-Cas9 Knock-Out NGS data.
             p_ind.print_help()
         elif sys.argv[1] == 'fs':
             p_fs.print_help()
+        elif sys.argv[1] == 'eval':
+            p_ev.print_help()
         elif sys.argv[1] == 'vis':
             p_vis.print_help()
         sys.exit(1)
@@ -104,6 +112,9 @@ CRISPR-Cas9 Knock-Out NGS data.
     elif sys.argv[1] == 'fs':
         from src.core import fs
         fs.GeneralFs(opts)
+    elif sys.argv[1] == 'eval':
+        from src.core import eval
+        eval.SgEval(opts)
     elif sys.argv[1] == 'vis':
         from src.core import vis
         vis.Visualize(opts)

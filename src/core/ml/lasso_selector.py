@@ -37,4 +37,4 @@ def LassoSelector(x, y, cv, niter, njob):
 
     lr.fit(x[:,columns], y)
         
-    return Md(model=lr.coef_, idx=columns, cor=np.mean(l1cor), r2=np.mean(l1r2))
+    return Md(model=lr, idx=columns, cor=np.mean(l1cor), r2=np.mean(l1r2))

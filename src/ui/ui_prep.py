@@ -7,7 +7,7 @@ def ParsePrep(p_prep):
     prep_inp.add_argument('-r', '--reverse', dest='rev', help='Reverse Fastq File')
 
     prep_otp = p_prep.add_argument_group('Output options')
-    prep_otp.add_argument('-d', '--target-dir', dest='tdir', help='Target Directory, default = .', default='.')
+    prep_otp.add_argument('-o', '--output-dir', dest='tdir', help='Output Directory, default = .', default='.')
 
     prep_par = p_prep.add_argument_group('Parameter options')
     prep_par.add_argument('-g', '--reference', dest='ref', required=True, help='Reference Genome (required)')
