@@ -124,7 +124,7 @@ For more detail on the options, see `python cage.py fs -h`.
 ```bash
 python cage.py eval -s <sg file>
                     -f <score function file>
-                    -o<output directory>
+                    -o <output directory>
 					-g <reference genome>
 ```
 
