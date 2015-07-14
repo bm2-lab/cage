@@ -17,6 +17,7 @@ Knock-Out NGS data.
 * bwa >= 0.7.12
 * samtools >= 0.1.19
 * bedtools >= 2.23.0
+* LaTeX (for visualization)
 
 ## Presetting
 Make sure to perform this presetting carefully. Because reference setting
