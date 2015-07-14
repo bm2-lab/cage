@@ -57,12 +57,12 @@ python cage.py <command> [option] ...
 
 ## Command
 1. `sg`    Process sgRNA sequences into sgRNA information table
-2. `prep`  Process raw sequence data into sgRNA-Indel Table
+2. `prep`  Process NGS data into sgRNA-Indel Table
 3. `mh`    Microhomology Detection
-4. `indel` Seq-Feature Selection on Indel Frameshifting Paradigm
-5. `fs`    Seq-Feature Selection on General Data Source
-6. `eval`  sgRNA Evaluation
-7. `vis`   Result Visualization
+4. `indel` Feature Selection and Model Prediction on sgRNA OTF Ratio
+5. `fs`    Feature Selection and Model Prediction on General sgRNA KO Efficiency 
+6. `eval`  sgRNA KO Efficiency Evaluation
+7. `vis`   Visualization for Feature Selection Result
 
 ## sgRNA Processing
 ```bash
@@ -73,7 +73,7 @@ python cage.py sg -s <sgRNA.fq>
 ```
 For more detail on the options, see `python cage.py sg -h`.
 
-## Preprocessing
+## NGS Data Preprocessing
 * Single-end
 ```bash
 python cage.py prep -s <sg file>
@@ -102,7 +102,7 @@ python cage.py mh -i <samind file>
 ```
 For more detail on the options, see `python cage.py mh -h`.
 
-## Indel Analysis
+## Feature Selection and Model Prediction on sgRNA OTF Ratio
 ```bash
 python cage.py indel -i <samind file>
                      -s <sg file>
@@ -111,7 +111,7 @@ python cage.py indel -i <samind file>
 ```
 For more detail on the options, see `python cage.py indel -h`.
 
-## General Feature Selection
+## Feature Selection and Model Prediction on General sgRNA KO Efficiency 
 ```bash
 python cage.py fs -i <label file>
                   -s <sg file>
@@ -121,7 +121,7 @@ python cage.py fs -i <label file>
 ```
 For more detail on the options, see `python cage.py fs -h`.
 
-## sgRNA Evaluation
+## sgRNA KO Efficiency Evaluation
 ```bash
 python cage.py eval -s <sg file>
                     -f <score function file>
@@ -136,3 +136,23 @@ python cage.py vis -f <feature report file>
                    -o <output directory>
 ```
 For more detail on the options, see `python cage.py vis -h`.				
+
+## Test
+For commands testing, `cd test` first, then execute the following
+commands.
+
+* Testing `sg`: `sh test.sh sg`
+* Testing single-end `prep`: `sh test.sh prep_se`
+* Testing pair-end `prep`: `sh test.sh prep_pe`
+* Testing `mh`: `sh test.sh mh`
+* Testing `indel` without auto detection: `sh test.sh indel`
+* Testing `indel` with auto detection: `sh test.sh indel_a`
+* Testing `fs` using *LASSO* without auto detection: `sh test.sh
+fs_las`
+* Testing `fs` using *LASSO* with auto detection: `sh test.sh fs_las_a`
+* Testing `fs` using *Logistic Regression* without auto detection: `sh test.sh
+fs_log`
+* Testing `fs` using *Logistic Regression* with auto detection: `sh test.sh
+fs_log_a`
+* Testing `eval`: `sh test.sh eval`
+* Testing `vis`: `sh test.sh vis`

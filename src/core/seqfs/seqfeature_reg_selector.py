@@ -79,6 +79,7 @@ def LassoRegionOptimizer(str_f_iosg, str_f_st, str_refgem,
     int_ups = int_ups_regn[arr_r2.argmax()]
     int_dws = int_dws_regn[arr_r2.argmax()]
     dfm_x = ExtractSeqFeature(str_f_iosg, str_refgem, int_ups, int_dws)
+    dfm_x.to_csv(str_of_seq, sep='\t', index=None)
     dfm_y = pd.merge(dfm_x, dfm_st, on='sgID')
     dfm_x = dfm_y.ix[:, 1:-1]
     dfm_y = dfm_y[[-1]]

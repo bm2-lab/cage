@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='utf-8'?>
+<report>
+  <features method="lasso" n="36" ups="35" dws="32">
+    <ups_33_C/>
+    <ups_30_G/>
+    <ups_22_G/>
+    <ups_21_G/>
+    <ups_20_A/>
+    <ups_14_G/>
+    <ups_13_C/>
+    <ups_9_G/>
+    <ups_8_A/>
+    <ups_5_G/>
+    <ups_1_A/>
+    <spa_1_C/>
+    <spa_2_C/>
+    <spa_4_A/>
+    <spa_5_T/>
+    <spa_6_C/>
+    <spa_8_A/>
+    <spa_9_C/>
+    <spa_9_T/>
+    <spa_10_C/>
+    <spa_15_T/>
+    <spa_17_A/>
+    <spa_19_C/>
+    <pam_1_G/>
+    <pam_2_G/>
+    <dws_2_A/>
+    <dws_6_G/>
+    <dws_12_G/>
+    <dws_13_C/>
+    <dws_14_C/>
+    <dws_15_A/>
+    <dws_24_A/>
+    <dws_24_G/>
+    <dws_26_G/>
+    <dws_26_T/>
+    <dws_28_A/>
+  </features>
+  <cross_validation n_iter="1000" fold="5">
+    <metric>
+      <pearson_cor value="0.849"/>
+      <r2 value="0.604"/>
+    </metric>
+  </cross_validation>
+</report>
