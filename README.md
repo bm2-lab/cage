@@ -1,12 +1,11 @@
 # cage-dev
-CRISPR KO Analysis based on Genomic Editing data (development)
+**C**RISPR KO **A**nalysis based on **G**enomic **E**diting data (development)
 
 ## Introduction
-A CRISPR-cas9 based Genome Editing data analysis pipeline, for the
-analyzing indels and microhomology patterns, identifying personalized features correlated to sgRNA KO efficiency on heterogeneous experimental conditions, and evaluating the sgRNA KO efficiency based on the CRISPR-Cas9
+A CRISPR-cas9 based Genome Editing data analysis pipeline, for analyzing indels and microhomology patterns, identifying personalized features correlated to sgRNA KO efficiency on heterogeneous experimental conditions, and evaluating the sgRNA KO efficiency based on the CRISPR-Cas9
 Knock-Out NGS data.
 
-The ultimate goal of CAGE is four folds (1) CAGE provides a standard CROWDSOURCING platform for the users to share the CRISPR-Cas9 based gene KO data, (2) CAGE provides an efficient interface to analysis and visualize the CRISPR-based KO NGS data, (3) CAGE provides a robust learning pipeline to derive the sequence determinants from heterogeneous genome editing data for different cell types and organisms, and (4) CAGE provides an personalized scoring framework for on-target sgRNA design based on the derived sequence determinants for specific cell types or organisms.
+The ultimate goals of CAGE are (1) CAGE provides a standard CROWDSOURCING platform for the users to share the CRISPR-Cas9 based gene KO data, (2) CAGE provides an efficient interface to analysis and visualize the CRISPR-based KO NGS data, (3) CAGE provides a robust learning pipeline to derive the sequence determinants from heterogeneous genome editing data for different cell types and organisms, and (4) CAGE provides an personalized scoring framework for on-target sgRNA design based on the derived sequence determinants for specific cell types or organisms.
 
 ## Implementation
 * Python >= 2.7
