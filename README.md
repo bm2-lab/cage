@@ -7,6 +7,9 @@ Knock-Out NGS data or the sgRNA KO assay data.
 
 The ultimate goals of CAGE are (1) CAGE provides a standard CROWDSOURCING platform for the users to share the CRISPR-Cas9 based gene KO data, (2) CAGE provides an efficient interface to analysis and visualize the CRISPR-based KO NGS data, (3) CAGE provides a robust learning pipeline to derive the sequence determinants from heterogeneous genome editing data for different cell types and organisms, and (4) CAGE provides an personalized scoring framework for on-target sgRNA design based on the derived sequence determinants for specific cell types or organisms.
 
+Currently CAGE records the optimal sgRNA KO efficiency prediction models and the personalized score functions in sgRNA design for the following XXX cell types. The optimal results for new cell types as well as the the current ones will be updated timely.  
+
+
 ## Implementation
 * Python >= 2.7
 * Numpy >= 1.9.2
