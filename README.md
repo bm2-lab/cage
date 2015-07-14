@@ -60,12 +60,12 @@ python cage.py <command> [option] ...
 1. `sg`    Process sgRNA sequences into sgRNA information table
 2. `prep`  Process NGS data into sgRNA-Indel Table
 3. `mh`    Microhomology Detection
-4. `indel` Feature Selection and Model Prediction on sgRNA OTF Ratio
-5. `fs`    Feature Selection and Model Prediction on General sgRNA KO Efficiency 
-6. `eval`  sgRNA KO Efficiency Evaluation
-7. `vis`   Visualization for Feature Selection Result
+4. `indel` Feature selection and model prediction on sgRNA OTF ratio based on NGS data
+5. `fs`    Feature selection and model prediction on clearly defined sgRNA KO efficiency
+6. `eval`  sgRNA KO efficiency evaluation
+7. `vis`   Visualization of feature selection result
 
-## sgRNA Processing
+## sgRNA processing
 ```bash
 python cage.py sg -s <sgRNA.fq>
 	              -o <output directory>
@@ -74,7 +74,7 @@ python cage.py sg -s <sgRNA.fq>
 ```
 For more detail on the options, see `python cage.py sg -h`.
 
-## NGS Data Preprocessing
+## NGS data preprocessing
 * Single-end
 ```bash
 python cage.py prep -s <sg file>
@@ -95,7 +95,7 @@ python cage.py prep -s <sg file>
 ```
 For more detail on the options, see `python cage.py prep -h`.
 
-## Microhomology Detection
+## Microhomology detection
 ```bash
 python cage.py mh -i <samind file>
                   -o <output directory>
@@ -103,7 +103,7 @@ python cage.py mh -i <samind file>
 ```
 For more detail on the options, see `python cage.py mh -h`.
 
-## Feature Selection and Model Prediction on sgRNA OTF Ratio
+## Feature selection and model prediction on sgRNA OTF Ratio based on NGS data
 ```bash
 python cage.py indel -i <samind file>
                      -s <sg file>
@@ -112,7 +112,7 @@ python cage.py indel -i <samind file>
 ```
 For more detail on the options, see `python cage.py indel -h`.
 
-## Feature Selection and Model Prediction on General sgRNA KO Efficiency 
+## Feature selection and model prediction on clearly defined sgRNA KO efficiency 
 ```bash
 python cage.py fs -i <label file>
                   -s <sg file>
@@ -122,7 +122,7 @@ python cage.py fs -i <label file>
 ```
 For more detail on the options, see `python cage.py fs -h`.
 
-## sgRNA KO Efficiency Evaluation
+## sgRNA KO efficiency evaluation
 ```bash
 python cage.py eval -s <sg file>
                     -f <score function file>
