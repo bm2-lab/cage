@@ -10,12 +10,11 @@ The ultimate goals of CAGE:
 1. CAGE provides a standard CROWDSOURCING platform for the users to
 share the CRISPR-Cas9 based gene KO data.
 
-2. CAGE provides an efficient interface to analysis and visualize the
+2. CAGE provides an efficient interface to analyze and visualize the
 CRISPR-based KO NGS data.
 
 3. CAGE provides a robust learning pipeline to derive the sequence
-determinants from heterogeneous genome editing data for different cell
-types and organisms.
+determinants from heterogeneous genome editing data.
 
 4. CAGE provides an personalized scoring framework for on-target sgRNA design based on the derived sequence determinants for specific cell types or organisms.
 
