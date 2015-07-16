@@ -22,7 +22,7 @@ types and organisms.
 Currently CAGE records the optimal sgRNA KO efficiency prediction
 models and the personalized score functions in sgRNA design for the
 following 7 cell types. The optimal results for new cell types as well
-as the the current ones will be updated timely.
+as the the current ones will be updated timely. The users can select the existed score function for a specific cell type for sgRNA design, or they can use their own sgRNA KO data to generate a new personalized score function for a new cell type for furthur sgRNA KO efficiency evaluation.
 
 Score Function | Species | Cell Type | KO Efficiency Measurement | Data Type | Learning Model | Performance | Actual sgRNA Library Size | Accession | Time Stamp
 ---------|-----|-----|-------|---------|-------|------|-------|----|------
@@ -103,7 +103,7 @@ python cage.py <command> [option] ...
 3. `mh`    Microhomology Detection
 4. `indel` Feature selection and model prediction on sgRNA OTF ratio based on NGS data
 5. `fs`    Feature selection and model prediction on clearly defined sgRNA KO efficiency
-6. `eval`  sgRNA KO efficiency evaluation
+6. `eval`  sgRNA KO efficiency evaluation and the scanning of a given genome region for sgRNA design
 7. `vis`   Visualization of feature selection result
 
 ## Data File Format
@@ -232,7 +232,7 @@ python cage.py fs -i <label file>
 ```
 For more detail on the options, see `python cage.py fs -h`.
 
-## sgRNA KO efficiency evaluation
+## sgRNA KO efficiency evaluation and the scanning of a given genome region for sgRNA design
 * Evaluation with Genome Scanner
 ```
 python cage.py eval -c <target chromosome>
