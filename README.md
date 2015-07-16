@@ -5,12 +5,12 @@
 A CRISPR-cas9 based Genome Editing data analysis pipeline, for the analysis of indels and microhomology patterns, the identification of personalized features correlated to sgRNA KO efficiency on heterogeneous experimental conditions, and the evaluation of the sgRNA KO efficiency based on the CRISPR-Cas9
 Knock-Out NGS data or the sgRNA KO assay data.
 
-The ultimate goals of CAGE are (1) CAGE provides a standard CROWDSOURCING platform for the users to share the CRISPR-Cas9 based gene KO data, (2) CAGE provides an efficient interface to analysis and visualize the CRISPR-based KO NGS data, (3) CAGE provides a robust learning pipeline to derive the sequence determinants from heterogeneous genome editing data for different cell types and organisms, and (4) CAGE provides an personalized scoring framework for on-target sgRNA design based on the derived sequence determinants for specific cell types or organisms.
+The ultimate goals of CAGE are (1) CAGE provides a standard CROWDSOURCING platform for the users to share the CRISPR-Cas9 based gene KO data, (2) CAGE provides an efficient interface to analysis and visualize the CRISPR-based KO NGS data, (3) CAGE provides a robust learning pipeline to derive the sequence determinants from heterogeneous genome editing data, and (4) CAGE provides an personalized scoring framework for on-target sgRNA design based on the derived sequence determinants for specific cell types or organisms.
 
 Currently CAGE records the optimal sgRNA KO efficiency prediction
 models and the personalized score functions in sgRNA design for the
 following 7 cell types. The optimal results for new cell types as well
-as the the current ones will be updated timely.
+as the the current ones will be updated timely. The users can select the score function for a specific cell type for sgRNA design, or they can use their own sgRNA KO data to generate the personalized score function for a new cell type.
 
 Score Function | Species | Cell Type | KO Efficiency Measurement | Data Type | Learning Model | Performance | Actual sgRNA Library Size | Accession | Time Stamp
 ---------|-----|-----|-------|---------|-------|------|-------|----|------
@@ -91,7 +91,7 @@ python cage.py <command> [option] ...
 3. `mh`    Microhomology Detection
 4. `indel` Feature selection and model prediction on sgRNA OTF ratio based on NGS data
 5. `fs`    Feature selection and model prediction on clearly defined sgRNA KO efficiency
-6. `eval`  sgRNA KO efficiency evaluation
+6. `eval`  sgRNA KO efficiency evaluation and the scanning of a given genome region for sgRNA design
 7. `vis`   Visualization of feature selection result
 
 ## sgRNA processing
@@ -198,7 +198,7 @@ python cage.py fs -i <label file>
 ```
 For more detail on the options, see `python cage.py fs -h`.
 
-## sgRNA KO efficiency evaluation
+## sgRNA KO efficiency evaluation and the scanning of a given genome region for sgRNA design
 * Evaluation with Genome Scanner
 ```
 python cage.py eval -c <target chromosome>
