@@ -15,10 +15,7 @@ case $1 in
 	python ../cage.py mh -i data/nmeth3015/nmeth3015.samind -o result/mh -g hg19
 	;;
     'indel')
-	python ../cage.py indel -i data/nmeth3015/nmeth3015.samind -s data/nmeth3015/nmeth3015.sg -o result/indel/non-auto -g hg19 -u 35 -w 32
-	;;
-    'indel_a')
-	python ../cage.py indel -i data/nmeth3015/nmeth3015.samind -s data/nmeth3015/nmeth3015.sg -o result/indel/auto -g hg19 -a
+	python ../cage.py indel -i data/nmeth3015/nmeth3015.samind -s data/nmeth3015/nmeth3015.sg -o result/indel -g hg19
 	;;
     'fs_las')
 	python ../cage.py fs -i data/nmeth3015/nmeth3015.iost -s data/nmeth3015/nmeth3015.sg -o result/fs/las/non-auto -g hg19 -u 35 -w 32 -m lasso

@@ -43,9 +43,9 @@ CRISPR-Cas9 Knock-Out NGS data.
     ui.ParseMh(p_mh)
     
     p_ind = sp.add_parser('indel',
-                          description='Seq-Feature Selection on Indel Frameshifting Paradigm',
+                          description='Indel Frameshifting Paradigm Analysis',
                           usage='python cage.py indel [options]',
-                          help='Seq-Feature Selection on Indel Frameshifting Paradigm')
+                          help='Indel Frameshifting Paradigm Analysis')
     ui.ParseInd(p_ind)
     
     p_fs = sp.add_parser('fs',

@@ -101,7 +101,7 @@ python cage.py <command> [option] ...
 1. `sg`    Process sgRNA sequences into sgRNA information table
 2. `prep`  Process NGS data into sgRNA-Indel Table
 3. `mh`    Microhomology Detection
-4. `indel` Feature selection and model prediction on sgRNA OTF ratio based on NGS data
+4. `indel` Indel Frameshifting Paradigm Analysis
 5. `fs`    Feature selection and model prediction on clearly defined sgRNA KO efficiency
 6. `eval`  sgRNA KO efficiency evaluation and the scanning of a given genome region for sgRNA design
 7. `vis`   Visualization of feature selection result
@@ -112,6 +112,7 @@ File Type | Suffix | Usage
 sg file | .sg | sgRNA information table
 samind file | .samind | sgRNA-indel table
 mnst file | .mnst | microhomology information table
+iost file | .iost | indel information table that can be used as label file
 seq file | .seq | original sequence feature table
 fesrep file | _fesrep.xml | feature selection and model prediction report
 pkl file | .pkl | score function file
@@ -169,35 +170,15 @@ python cage.py mh -i <samind file>
 ```
 For more detail on the options, see `python cage.py mh -h`.
 
-## Feature selection and model prediction on sgRNA OTF Ratio based on NGS data
-* Manual
+## Indel Frameshifting Paradigm Analysis
+Generate indel information table (iost file)
 ```
 python cage.py indel -i <samind file>
                      -s <sg file>
                      -o <output directory>
 	                 -g <reference genome>
-					 -t <reads cutoff> (default 0)
-					 -u <upstream region length> (default 30)
-					 -w <downstream region length> (without PAM, default 27)
-					 -c <cross-validation folds> (default 5)
-					 -j <number of CPU cores used> (default 1)
+					 -t <read-count cutoff> (default 0)
 ```
-
-* Auto
-```
-python cage.py indel -i <samind file>
-                     -s <sg file>
-                     -o <output directory>
-	                 -g <reference genome>
-					 -t <reads cutoff> (default 0)
-					 -a (auto detection for sequence region)
-					 --init-radius <init radius> (default 0)
-					 -r <radius> (default 200)
-					 --step <detection step> (default 5)
-					 -c <cross-validation folds> (default 5)
-					 -j <number of CPU cores used> (default 1)
-```
-
 For more detail on the options, see `python cage.py indel -h`.
 
 ## Feature selection and model prediction on clearly defined sgRNA KO efficiency
@@ -268,8 +249,7 @@ To run examples, `cd example` first, then execute the following commands.
 * `prep` for single-end: `sh exam.sh prep_se`
 * `prep` for pair-end: `sh exam.sh prep_pe`
 * `mh`: `sh exam.sh mh`
-* `indel` without auto detection: `sh exam.sh indel`
-* `indel` with auto detection: `sh exam.sh indel_a`
+* `indel`: `sh exam.sh indel`
 * `fs` using *LASSO* without auto detection: `sh exam.sh fs_las`
 * `fs` using *LASSO* with auto detection: `sh exam.sh fs_las_a`
 * `fs` using *Logistic Regression* without auto detection: `sh exam.sh
