@@ -5,7 +5,19 @@
 A CRISPR-cas9 based Genome Editing data analysis pipeline, for the analysis of indels and microhomology patterns, the identification of personalized features correlated to sgRNA KO efficiency on heterogeneous experimental conditions, and the evaluation of the sgRNA KO efficiency based on the CRISPR-Cas9
 Knock-Out NGS data or the sgRNA KO assay data.
 
-The ultimate goals of CAGE are (1) CAGE provides a standard CROWDSOURCING platform for the users to share the CRISPR-Cas9 based gene KO data, (2) CAGE provides an efficient interface to analysis and visualize the CRISPR-based KO NGS data, (3) CAGE provides a robust learning pipeline to derive the sequence determinants from heterogeneous genome editing data for different cell types and organisms, and (4) CAGE provides an personalized scoring framework for on-target sgRNA design based on the derived sequence determinants for specific cell types or organisms.
+The ultimate goals of CAGE:
+
+1. CAGE provides a standard CROWDSOURCING platform for the users to
+share the CRISPR-Cas9 based gene KO data.
+
+2. CAGE provides an efficient interface to analysis and visualize the
+CRISPR-based KO NGS data.
+
+3. CAGE provides a robust learning pipeline to derive the sequence
+determinants from heterogeneous genome editing data for different cell
+types and organisms.
+
+4. CAGE provides an personalized scoring framework for on-target sgRNA design based on the derived sequence determinants for specific cell types or organisms.
 
 Currently CAGE records the optimal sgRNA KO efficiency prediction
 models and the personalized score functions in sgRNA design for the
@@ -93,6 +105,28 @@ python cage.py <command> [option] ...
 5. `fs`    Feature selection and model prediction on clearly defined sgRNA KO efficiency
 6. `eval`  sgRNA KO efficiency evaluation
 7. `vis`   Visualization of feature selection result
+
+## Data File Format
+File Type | Suffix | Usage
+----|----|----
+sg file | .sg | sgRNA information table
+samind file | .samind | sgRNA-indel table
+mnst file | .mnst | microhomology information table
+seq file | .seq | original sequence feature table
+fesrep file | _fesrep.xml | feature selection and model prediction report
+pkl file | .pkl | score function file
+st file | .st | evaluation result file
+label file | (arbitrary) | user-customized evaluation file for feature selection and model prediction
+
+#####Note
+For label file, the first and the last column will be regarded as
+sgID and score respectively. File header should exist and the header
+of the first column must be sgID. See the following example.
+
+sgID | ... | score
+----|----|----
+sg1 | ... | 0.1
+sg2 | ... | 0.2
 
 ## sgRNA processing
 Generate sgRNA Information Table (sg file)

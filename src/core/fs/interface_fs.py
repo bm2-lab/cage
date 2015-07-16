@@ -11,7 +11,7 @@ def GeneralFs(opts):
     str_path_sg = opts.sg
     str_path_seq = os.path.join(str_path_proj, str_nm + '.seq')
     str_path_fesrep = os.path.join(opts.tdir, str_nm + '_fesrep.xml')
-    str_proj = 'model'
+    str_proj = 'score_function'
     str_path_proj = os.path.join(opts.tdir, str_proj)
     if not os.path.exists(str_path_proj):
         os.makedirs(str_path_proj)
