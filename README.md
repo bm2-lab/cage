@@ -10,7 +10,7 @@ The ultimate goals of CAGE are (1) CAGE provides a standard CROWDSOURCING platfo
 Currently CAGE records the optimal sgRNA KO efficiency prediction
 models and the personalized score functions in sgRNA design for the
 following 7 cell types. The optimal results for new cell types as well
-as the the current ones will be updated timely. The users can select the score function for a specific cell type for sgRNA design, or they can use their own sgRNA KO data to generate the personalized score function for a new cell type.
+as the the current ones will be updated timely. The users can select the existed score function for a specific cell type for sgRNA design, or they can use their own sgRNA KO data to generate a new personalized score function for a new cell type for furthur sgRNA KO efficiency evaluation.
 
 Score Function | Species | Cell Type | KO Efficiency Measurement | Data Type | Learning Model | Performance | Actual sgRNA Library Size | Accession | Time Stamp
 ---------|-----|-----|-------|---------|-------|------|-------|----|------
