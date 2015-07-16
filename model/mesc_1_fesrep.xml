@@ -1,0 +1,70 @@
+<?xml version='1.0' encoding='utf-8'?>
+<report>
+  <features method="lasso" n="59" ups="73" dws="70">
+    <ups_73_C/>
+    <ups_73_G/>
+    <ups_71_C/>
+    <ups_69_C/>
+    <ups_59_G/>
+    <ups_58_A/>
+    <ups_57_C/>
+    <ups_54_C/>
+    <ups_50_G/>
+    <ups_44_T/>
+    <ups_43_G/>
+    <ups_42_A/>
+    <ups_40_C/>
+    <ups_39_T/>
+    <ups_36_T/>
+    <ups_35_T/>
+    <ups_32_G/>
+    <ups_31_G/>
+    <ups_30_G/>
+    <ups_27_A/>
+    <ups_26_C/>
+    <ups_24_T/>
+    <ups_20_C/>
+    <ups_18_T/>
+    <ups_15_A/>
+    <ups_15_C/>
+    <ups_10_G/>
+    <ups_4_A/>
+    <ups_1_T/>
+    <spa_1_G/>
+    <spa_5_C/>
+    <spa_5_G/>
+    <spa_6_C/>
+    <spa_8_A/>
+    <spa_8_G/>
+    <spa_11_C/>
+    <spa_14_A/>
+    <spa_19_G/>
+    <dws_2_C/>
+    <dws_8_A/>
+    <dws_26_T/>
+    <dws_31_G/>
+    <dws_43_A/>
+    <dws_45_C/>
+    <dws_49_C/>
+    <dws_50_C/>
+    <dws_51_T/>
+    <dws_52_G/>
+    <dws_54_G/>
+    <dws_55_T/>
+    <dws_57_T/>
+    <dws_58_A/>
+    <dws_58_T/>
+    <dws_59_A/>
+    <dws_63_C/>
+    <dws_66_C/>
+    <dws_66_G/>
+    <dws_67_G/>
+    <dws_69_T/>
+  </features>
+  <cross_validation n_iter="1000" fold="5">
+    <metric>
+      <pearson_cor value="0.875"/>
+      <r2 value="0.655"/>
+    </metric>
+  </cross_validation>
+</report>

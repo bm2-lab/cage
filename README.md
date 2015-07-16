@@ -7,8 +7,34 @@ Knock-Out NGS data or the sgRNA KO assay data.
 
 The ultimate goals of CAGE are (1) CAGE provides a standard CROWDSOURCING platform for the users to share the CRISPR-Cas9 based gene KO data, (2) CAGE provides an efficient interface to analysis and visualize the CRISPR-based KO NGS data, (3) CAGE provides a robust learning pipeline to derive the sequence determinants from heterogeneous genome editing data for different cell types and organisms, and (4) CAGE provides an personalized scoring framework for on-target sgRNA design based on the derived sequence determinants for specific cell types or organisms.
 
-Currently CAGE records the optimal sgRNA KO efficiency prediction models and the personalized score functions in sgRNA design for the following XXX cell types. The optimal results for new cell types as well as the the current ones will be updated timely.  
+Currently CAGE records the optimal sgRNA KO efficiency prediction
+models and the personalized score functions in sgRNA design for the
+following 7 cell types. The optimal results for new cell types as well
+as the the current ones will be updated timely.
 
+Score Function | Species | Cell Type | KO Efficiency Measurement | Data Type | Learning Model | Performance | Actual sgRNA Library Size | Accession | Time Stamp
+---------|-----|-----|-------|---------|-------|------|-------|----|------
+a375_1 | Homo sapiens | A375 | See [Doench et al.][1] | numerical | LASSO | r2=0.64 | 1248 | - | 2015-7-16
+el4_1 | Mus musculus | EL4 | See [Doench et al.][1] | numerical | LASSO | r2=0.65 | 858 | - | 2015-7-16
+mesc_1 | Mus musculus | mESC | OTF Ratio | numerical | LASSO | r2=0.66 | 99 | [ERP003292][2] | 2015-7-16
+rn2c_1 | Mus musculus | RN2c | OTF Ratio | numerical | LASSO | r2=0.85| 26 | [SRP057117][3] | 2015-7-16
+hela_1 | Homo sapiens | Hela | OTF Ratio | numerical | LASSO | r2=0.84| 68 | [SRP042061][4] | 2015-7-16
+dr_1 | Danio rerio | *AB/Tu | OTF Ratio | numerical | LASSO | r2=0.92| 47 | [SRP052749][5] | 2015-7-16
+hl60_nonribo | Homo sapiens | HL60 | See [Xu et al.][6] | categorical|Logistic | AUC=0.86 | 908 | - | 2015-7-16
+hl60_ribo | Homo sapiens | HL60 | See [Xu et al.][6] | categorical| Logistic | AUC=0.90 | 373 | - | 2015-7-16
+mesc_2 | Mus musculus | mESC | See [Xu et al.][6] | categorical | Logistic | AUC=0.80 | 86887 | - | 2015-7-16
+
+[1]: http://www.nature.com/nbt/journal/v32/n12/full/nbt.3026.html
+
+[2]: http://www.ebi.ac.uk/ena/data/view/ERP003292
+
+[3]: http://www.ncbi.nlm.nih.gov/sra/?term=SRP057117
+
+[4]: http://www.ncbi.nlm.nih.gov/sra/?term=SRP042061
+
+[5]: http://www.ncbi.nlm.nih.gov/sra/?term=SRP052749
+
+[6]: http://genome.cshlp.org/content/early/2015/07/01/gr.191452.115
 
 ## Implementation
 * Python >= 2.7
@@ -55,7 +81,7 @@ git clone https://github.com/bm2-lab/cage-dev.git
 ```
 
 ## Usage
-```bash
+```
 python cage.py <command> [option] ...
 ```
 
@@ -69,17 +95,20 @@ python cage.py <command> [option] ...
 7. `vis`   Visualization of feature selection result
 
 ## sgRNA processing
-```bash
+Generate sgRNA Information Table (sg file)
+```
 python cage.py sg -s <sgRNA.fq>
 	              -o <output directory>
-                  -g <reference genome>
-				  -t <bwa threads>
+                  -g <reference genome> (e.g. hg19)
+				  -t <bwa threads> (default 1)
+				  -a (annotate, optional)
 ```
 For more detail on the options, see `python cage.py sg -h`.
 
 ## NGS data preprocessing
+Generate sgRNA-Indel Table (samind file)
 * Single-end
-```bash
+```
 python cage.py prep -s <sg file>
 	                -f <reads.fq>
 	                -o <output directory>
@@ -88,7 +117,7 @@ python cage.py prep -s <sg file>
 ```
 
 * Paired-end
-```bash
+```
 python cage.py prep -s <sg file>
                     -f <reads_1.fq>
 					-r <reads_2.fq>
@@ -99,7 +128,7 @@ python cage.py prep -s <sg file>
 For more detail on the options, see `python cage.py prep -h`.
 
 ## Microhomology detection
-```bash
+```
 python cage.py mh -i <samind file>
                   -o <output directory>
 	              -g <reference genome>
@@ -107,26 +136,83 @@ python cage.py mh -i <samind file>
 For more detail on the options, see `python cage.py mh -h`.
 
 ## Feature selection and model prediction on sgRNA OTF Ratio based on NGS data
-```bash
+* Manual
+```
 python cage.py indel -i <samind file>
                      -s <sg file>
                      -o <output directory>
 	                 -g <reference genome>
+					 -t <reads cutoff> (default 0)
+					 -u <upstream region length> (default 30)
+					 -w <downstream region length> (without PAM, default 27)
+					 -c <cross-validation folds> (default 5)
+					 -j <number of CPU cores used> (default 1)
 ```
+
+* Auto
+```
+python cage.py indel -i <samind file>
+                     -s <sg file>
+                     -o <output directory>
+	                 -g <reference genome>
+					 -t <reads cutoff> (default 0)
+					 -a (auto detection for sequence region)
+					 --init-radius <init radius> (default 0)
+					 -r <radius> (default 200)
+					 --step <detection step> (default 5)
+					 -c <cross-validation folds> (default 5)
+					 -j <number of CPU cores used> (default 1)
+```
+
 For more detail on the options, see `python cage.py indel -h`.
 
-## Feature selection and model prediction on clearly defined sgRNA KO efficiency 
-```bash
+## Feature selection and model prediction on clearly defined sgRNA KO efficiency
+* Manual
+```
 python cage.py fs -i <label file>
                   -s <sg file>
                   -o <output directory>
 	              -g <reference genome>
+				  -t <reads cutoff> (default 0)
+				  -u <upstream region length> (default 30)
+				  -w <downstream region length> (without PAM, default 27)
+				  -c <cross-validation folds> (default 5)
+				  -j <number of CPU cores used> (default 1)
 				  -m <lasso|logit>
+```
+
+* Auto
+```
+python cage.py fs -i <label file>
+                  -s <sg file>
+                  -o <output directory>
+	              -g <reference genome>
+				  -t <reads cutoff> (default 0)
+				  -a (auto detection for sequence region)
+				  --init-radius <init radius> (default 0)
+				  -r <radius> (default 200)
+				  --step <detection step> (default 5)
+				  -c <cross-validation folds> (default 5)
+				  -j <number of CPU cores used> (default 1)
+				  -m <lasso|logit> (method)
 ```
 For more detail on the options, see `python cage.py fs -h`.
 
 ## sgRNA KO efficiency evaluation
-```bash
+* Evaluation with Genome Scanner
+```
+python cage.py eval -c <target chromosome>
+                    -b <start coordinate>
+                    -e <end coordinate>
+                    -f <score function file>
+                    -o <output directory>
+					-g <reference genome>
+					-d <two-sided|pos|neg> (scan direction)
+					-t <bwa threads>
+```
+
+* Evaluation with sgRNA Information Table
+```
 python cage.py eval -s <sg file>
                     -f <score function file>
                     -o <output directory>
@@ -135,28 +221,27 @@ python cage.py eval -s <sg file>
 For more detail on the options, see `python cage.py eval -h`.
 
 ## Visualization
-```bash
+```
 python cage.py vis -f <feature report file>
                    -o <output directory>
 ```
 For more detail on the options, see `python cage.py vis -h`.				
 
-## Test
-For commands testing, `cd test` first, then execute the following
-commands.
+## Example
+To run examples, `cd example` first, then execute the following commands.
 
-* Testing `sg`: `sh test.sh sg`
-* Testing single-end `prep`: `sh test.sh prep_se`
-* Testing pair-end `prep`: `sh test.sh prep_pe`
-* Testing `mh`: `sh test.sh mh`
-* Testing `indel` without auto detection: `sh test.sh indel`
-* Testing `indel` with auto detection: `sh test.sh indel_a`
-* Testing `fs` using *LASSO* without auto detection: `sh test.sh
-fs_las`
-* Testing `fs` using *LASSO* with auto detection: `sh test.sh fs_las_a`
-* Testing `fs` using *Logistic Regression* without auto detection: `sh test.sh
-fs_log`
-* Testing `fs` using *Logistic Regression* with auto detection: `sh test.sh
+* `sg`: `sh exam.sh sg`
+* `prep` for single-end: `sh exam.sh prep_se`
+* `prep` for pair-end: `sh exam.sh prep_pe`
+* `mh`: `sh exam.sh mh`
+* `indel` without auto detection: `sh exam.sh indel`
+* `indel` with auto detection: `sh exam.sh indel_a`
+* `fs` using *LASSO* without auto detection: `sh exam.sh fs_las`
+* `fs` using *LASSO* with auto detection: `sh exam.sh fs_las_a`
+* `fs` using *Logistic Regression* without auto detection: `sh exam.sh
+  fs_log`
+* `fs` using *Logistic Regression* with auto detection: `sh exam.sh
 fs_log_a`
-* Testing `eval`: `sh test.sh eval`
-* Testing `vis`: `sh test.sh vis`
+* `eval` using genome scanner: `sh exam.sh eval`
+* `eval` using sgRNA information table: `sh exam.sh eval_sg`
+* `vis`: `sh exam.sh vis`

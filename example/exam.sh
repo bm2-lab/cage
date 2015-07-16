@@ -33,7 +33,10 @@ case $1 in
 	python ../cage.py fs -i data/nonribo/nonribo.st -s data/nonribo/nonribo.sg -o result/fs/log/auto -g hg19 -a -m logit --init-radius 30 -r 10 --step 5
 	;;
     'eval')
-	python ../cage.py eval -s data/nmeth3015/nmeth3015.sg -f data/nmeth3015/nmeth3015.pkl -o result/eval -g hg19
+	python ../cage.py eval -c chr3 -b 195609062 -e 195609284 -f data/nmeth3015/nmeth3015.pkl -o result/eval -g hg19
+	;;
+    'eval_sg')
+	python ../cage.py eval -s data/nmeth3015/nmeth3015.sg -f data/nmeth3015/nmeth3015.pkl -o result/eval_sg -g hg19
 	;;
     'vis')
 	python ../cage.py vis -f data/nmeth3015/nmeth3015_fesrep.xml -o result/vis

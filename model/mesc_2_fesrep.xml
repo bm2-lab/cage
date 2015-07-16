@@ -1,0 +1,89 @@
+<?xml version='1.0' encoding='utf-8'?>
+<report>
+  <features method="logit" n="75" ups="0" dws="0">
+    <spa_1_A/>
+    <spa_1_C/>
+    <spa_1_G/>
+    <spa_1_T/>
+    <spa_2_A/>
+    <spa_2_C/>
+    <spa_2_G/>
+    <spa_3_A/>
+    <spa_3_C/>
+    <spa_3_G/>
+    <spa_3_T/>
+    <spa_4_A/>
+    <spa_4_G/>
+    <spa_4_T/>
+    <spa_5_C/>
+    <spa_5_G/>
+    <spa_5_T/>
+    <spa_6_A/>
+    <spa_6_G/>
+    <spa_6_T/>
+    <spa_7_A/>
+    <spa_7_C/>
+    <spa_7_G/>
+    <spa_7_T/>
+    <spa_8_A/>
+    <spa_8_C/>
+    <spa_8_G/>
+    <spa_8_T/>
+    <spa_9_A/>
+    <spa_9_G/>
+    <spa_9_T/>
+    <spa_10_A/>
+    <spa_10_C/>
+    <spa_10_G/>
+    <spa_10_T/>
+    <spa_11_A/>
+    <spa_11_C/>
+    <spa_11_G/>
+    <spa_11_T/>
+    <spa_12_A/>
+    <spa_12_C/>
+    <spa_12_T/>
+    <spa_13_A/>
+    <spa_13_C/>
+    <spa_13_G/>
+    <spa_13_T/>
+    <spa_14_C/>
+    <spa_14_G/>
+    <spa_14_T/>
+    <spa_15_A/>
+    <spa_15_C/>
+    <spa_15_G/>
+    <spa_16_A/>
+    <spa_16_G/>
+    <spa_16_T/>
+    <spa_17_A/>
+    <spa_17_C/>
+    <spa_17_G/>
+    <spa_17_T/>
+    <spa_18_A/>
+    <spa_18_C/>
+    <spa_18_G/>
+    <spa_18_T/>
+    <spa_19_A/>
+    <spa_19_C/>
+    <spa_19_G/>
+    <spa_19_T/>
+    <spa_20_A/>
+    <spa_20_C/>
+    <spa_20_G/>
+    <spa_20_T/>
+    <pam_1_C/>
+    <pam_1_G/>
+    <pam_1_T/>
+    <pam_2_G/>
+  </features>
+  <cross_validation n_iter="1000" fold="5">
+    <metric>
+      <accuracy value="0.830"/>
+      <precision value="0.855"/>
+      <recall value="0.942"/>
+      <f1 value="0.896"/>
+      <auc value="0.801"/>
+    </metric>
+  </cross_validation>
+</report>

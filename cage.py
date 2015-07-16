@@ -84,6 +84,8 @@ CRISPR-Cas9 Knock-Out NGS data.
             p_ev.print_help()
         elif sys.argv[1] == 'vis':
             p_vis.print_help()
+        else:
+            p.print_help()
         sys.exit(1)
 
     if 'BWADB' not in os.environ:

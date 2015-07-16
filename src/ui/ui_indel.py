@@ -12,7 +12,7 @@ def ParseInd(p_ind):
     ind_par.add_argument('-g', '--reference', dest='ref', required=True, help='Reference Genome (required)')
     ind_par.add_argument('-t', '--cutoff', dest='cut', help='Cutoff of Reads (default = 0)', default=0, type=int)
     ind_par.add_argument('-a', '--auto', dest='auto', action='store_true', help='Auto Detection for Sequence Region')
-    ind_par.add_argument('--ir', dest='ir', help='Detection Region Init Radius (default = 0)', default=0, type=int)
+    ind_par.add_argument('--init-radius', dest='ir', help='Detection Region Init Radius (default = 0)', default=0, type=int)
     ind_par.add_argument('-r', '--radius', dest='rad', help='Detection Region Radius (default = 200)', default=200, type=int)
     ind_par.add_argument('--step', dest='step', help='Detection Step (default = 5)', default=5, type=int)
     ind_par.add_argument('-u', '--ups', dest='ups', help='Upstream Region Length (default = 30)', default=30, type=int)
