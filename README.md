@@ -37,7 +37,7 @@ mesc_2 | Mus musculus | mESC | See [Xu et al.][6] | categorical | Logistic | AUC
 [6]: http://genome.cshlp.org/content/early/2015/07/01/gr.191452.115
 
 ## Implementation
-* Python >= 2.7
+* Python 2.7
 * Numpy >= 1.9.2
 * Scipy >= 0.15.1
 * Pandas >= 0.16.0
