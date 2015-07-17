@@ -5,3 +5,4 @@ from ui_indel import *
 from ui_fs import *
 from ui_vis import *
 from ui_eval import *
+from ui_mt import *

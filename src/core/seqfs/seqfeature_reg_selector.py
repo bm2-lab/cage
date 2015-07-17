@@ -8,7 +8,7 @@ from src.core import ml
 
 
 
-Fr = namedtuple('Fr', ['fs', 'idx', 'ups', 'dws', 'niter', 'cv', 'cor', 'r2'])
+Fr = namedtuple('Fr', ['fs', 'ups', 'dws', 'niter', 'cv', 'cor', 'r2'])
 
 def __SaveFeatureReport(fr, str_of_fesrep):
     f_fesrep = open(str_of_fesrep, 'w')
@@ -16,7 +16,7 @@ def __SaveFeatureReport(fr, str_of_fesrep):
     enode_fes =etree.SubElement(enode_root, 'features')
     enode_cv = etree.SubElement(enode_root, 'cross_validation')
     enode_met = etree.SubElement(enode_cv, 'metric')
-    for (fs, idx) in zip(fr.fs, fr.idx):
+    for fs in fr.fs:
         enode_fes.append(etree.Element(fs))
     enode_fes.set('method', 'lasso')
     enode_fes.set('n', str(len(fr.fs)))
@@ -50,7 +50,7 @@ def LassoFeatureSelection(str_f_iosg, str_f_st, str_refgem,
 
     md = ml.LassoSelector(x, y, cv, niter, njob)
     lst_fs = [i for i in dfm_x.columns[md.idx]]
-    fr = Fr(fs=lst_fs, idx=md.idx, ups=int_ups, dws=int_dws, niter=niter, cv=cv,
+    fr = Fr(fs=lst_fs, ups=int_ups, dws=int_dws, niter=niter, cv=cv,
             cor=md.cor, r2=md.r2)
     __SaveFeatureReport(fr, str_of_fesrep)
     mdl = dict(med='lasso', model=md.model, idx=md.idx,
@@ -87,7 +87,7 @@ def LassoRegionOptimizer(str_f_iosg, str_f_st, str_refgem,
     y = np.array(dfm_y, dtype=np.double).ravel()
     md = ml.LassoSelector(x, y, cv, niter, njob)
     lst_fs = [i for i in dfm_x.columns[md.idx]]
-    fr = Fr(fs=lst_fs, idx=md.idx, ups=int_ups, dws=int_dws, niter=niter,
+    fr = Fr(fs=lst_fs, ups=int_ups, dws=int_dws, niter=niter,
             cv=cv, cor=md.cor, r2=md.r2)
     __SaveFeatureReport(fr, str_of_fesrep)
     mdl = dict(med='lasso', model=md.model, idx=md.idx,

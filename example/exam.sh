@@ -29,6 +29,9 @@ case $1 in
     'fs_log_a')
 	python ../cage.py fs -i data/nonribo/nonribo.st -s data/nonribo/nonribo.sg -o result/fs/log/auto -g hg19 -a -m logit --init-radius 30 -r 10 --step 5
 	;;
+    'mt')
+	python ../cage.py mt -i data/mt/n2800.iost data/mt/n3235.iost data/mt/nm3015.iost -s data/mt/n2800.iosg data/mt/n3235.iosg data/mt/nm3015.iosg -g mm9 mm9 hg19 -o result/mt
+	;;
     'eval')
 	python ../cage.py eval -c chr3 -b 195609062 -e 195609284 -f data/nmeth3015/nmeth3015.pkl -o result/eval -g hg19
 	;;

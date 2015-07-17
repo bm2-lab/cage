@@ -58,6 +58,7 @@ mesc_2 | Mus musculus | mESC | See [Xu et al.][6] | categorical | Logistic | AUC
 * bwa >= 0.7.12
 * samtools >= 0.1.19
 * bedtools >= 2.23.0
+* pyslep (for multi-task group lasso)
 * LaTeX (for visualization)
 
 ## Presetting
@@ -91,6 +92,12 @@ hg19gencode.bed | GENCODE | optional
 git clone https://github.com/bm2-lab/cage-dev.git
 ```
 
+##### Install pyslep
+For performing multi-task group lasso, pyslep is necessary.
+
+1. `cd pyslep`
+2. `sh setup_pyslep.sh`
+
 ## Usage
 ```
 python cage.py <command> [option] ...
@@ -102,8 +109,9 @@ python cage.py <command> [option] ...
 3. `mh`    Microhomology Detection
 4. `indel` Indel Frameshifting Paradigm Analysis
 5. `fs`    Feature selection and model prediction on clearly defined sgRNA KO efficiency
-6. `eval`  sgRNA KO efficiency evaluation and the scanning of a given genome region for sgRNA design
-7. `vis`   Visualization of feature selection result
+6. `mt`    Feature Selection with Multi-task Group LASSO on clearly defined sgRNA KO efficiency
+7. `eval`  sgRNA KO efficiency evaluation and the scanning of a given genome region for sgRNA design
+8. `vis`   Visualization of feature selection result
 
 ## Data File Format
 File Type | Suffix | Usage
@@ -212,6 +220,17 @@ python cage.py fs -i <label file>
 ```
 For more detail on the options, see `python cage.py fs -h`.
 
+## Feature Selection with Multi-task Group LASSO on clearly defined sgRNA KO efficiency
+```
+python cage.py mt -i [<label file> [<label file> ...]]
+                  -s [<sg file> [<sg file> ...]]
+                  -o <output directory>
+	              -g [<ref genome> [<ref genome> ...]]
+				  -u <upstream region length> (default 30)
+				  -w <downstream region length> (without PAM, default 27)
+				  -d <selection strictness>
+```
+
 ## sgRNA KO efficiency evaluation and the scanning of a given genome region for sgRNA design
 * Evaluation with Genome Scanner
 ```
@@ -255,6 +274,7 @@ To run examples, `cd example` first, then execute the following commands.
   fs_log`
 * `fs` using *Logistic Regression* with auto detection: `sh exam.sh
 fs_log_a`
+* `mt`: `sh exam.sh mt`
 * `eval` using genome scanner: `sh exam.sh eval`
 * `eval` using sgRNA information table: `sh exam.sh eval_sg`
 * `vis`: `sh exam.sh vis`

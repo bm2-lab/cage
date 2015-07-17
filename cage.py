@@ -19,7 +19,7 @@ CRISPR-Cas9 Knock-Out NGS data.
                                  description=str_desc,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
 
-    p.add_argument('-v', '--version', action='version', version='%(prog)s 0.3.2(dev)')
+    p.add_argument('-v', '--version', action='version', version='%(prog)s 3.0.0(dev)')
 
     sp = p.add_subparsers(title='Command', metavar='')
 
@@ -49,21 +49,27 @@ CRISPR-Cas9 Knock-Out NGS data.
     ui.ParseInd(p_ind)
     
     p_fs = sp.add_parser('fs',
-                          description='Seq-Feature Selection on General Data Source',
+                          description='Seq-Feature Selection and Model Prediction',
                           usage='python cage.py fs [options]',
-                          help='Seq-Feature Selection on General Data Source')
+                          help='Seq-Feature Selection and Model Prediction')
     ui.ParseFs(p_fs)
 
+    p_mt = sp.add_parser('mt',
+                         description='Seq-Feature Selection with Multi-task Group LASSO',
+                         usage='python cage.py mt [options]',
+                         help='Seq-Feature Selection with Multi-task Group LASSO')
+    ui.ParseMt(p_mt)
+
     p_ev = sp.add_parser('eval',
-                         description='sgRNA Evaluation',
+                         description='sgRNA KO efficiency evaluation',
                          usage='python cage.py eval [options]',
-                         help='sgRNA Evaluation')
+                         help='sgRNA KO efficiency evaluation')
     ui.ParseEval(p_ev)
     
     p_vis = sp.add_parser('vis',
-                          description='Result Visualization',
+                          description='Visualization',
                           usage='python cage.py vis [options]',
-                          help='Result Visualization')
+                          help='Visualization')
     ui.ParseVis(p_vis)
 
     if len(sys.argv) == 1:
@@ -80,6 +86,8 @@ CRISPR-Cas9 Knock-Out NGS data.
             p_ind.print_help()
         elif sys.argv[1] == 'fs':
             p_fs.print_help()
+        elif sys.argv[1] == 'mt':
+            p_mt.print_help()
         elif sys.argv[1] == 'eval':
             p_ev.print_help()
         elif sys.argv[1] == 'vis':
@@ -114,6 +122,9 @@ CRISPR-Cas9 Knock-Out NGS data.
     elif sys.argv[1] == 'fs':
         from src.core import fs
         fs.GeneralFs(opts)
+    elif sys.argv[1] == 'mt':
+        from src.core import mt
+        mt.MtFs(opts)
     elif sys.argv[1] == 'eval':
         from src.core import eval
         eval.SgEval(opts)
