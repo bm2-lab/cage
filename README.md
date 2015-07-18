@@ -1,4 +1,4 @@
-# cage
+# CAGE
 **C**RISPR KO **A**nalysis based on **G**enomic **E**diting data
 
 ## Introduction
