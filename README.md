@@ -107,9 +107,9 @@ python cage.py <command> [option] ...
 1. `sg`    Process sgRNA sequences into sgRNA information table
 2. `prep`  Process NGS data into sgRNA-Indel Table
 3. `mh`    Microhomology Detection
-4. `indel` Indel Frameshifting Paradigm Analysis
+4. `indel` Indel frameshifting paradigm analysis
 5. `fs`    Feature selection and model prediction on clearly defined sgRNA KO efficiency
-6. `mt`    Feature Selection with Multi-task Group LASSO on clearly defined sgRNA KO efficiency for cross-platform data
+6. `mt`    Feature selection with multi-task group LASSO on clearly defined sgRNA KO efficiency for cross-platform data
 7. `eval`  sgRNA KO efficiency evaluation and the scanning of a given genome region for sgRNA design
 8. `vis`   Visualization of feature selection result
 
@@ -177,7 +177,7 @@ python cage.py mh -i <samind file>
 ```
 For more detail on the options, see `python cage.py mh -h`.
 
-## Indel Frameshifting Paradigm Analysis
+## Indel frameshifting paradigm analysis
 Generate indel information table (iost file)
 ```
 python cage.py indel -i <samind file>
@@ -220,7 +220,7 @@ python cage.py fs -i <label file>
 ```
 For more detail on the options, see `python cage.py fs -h`.
 
-## Feature Selection with Multi-task Group LASSO on clearly defined sgRNA KO efficiency for cross-platform data
+## Feature selection with multi-task group LASSO on clearly defined sgRNA KO efficiency for cross-platform data
 ```
 python cage.py mt -i [<label file> [<label file> ...]]
                   -s [<sg file> [<sg file> ...]]
