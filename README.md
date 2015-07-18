@@ -1,5 +1,5 @@
-# cage-dev
-**C**RISPR KO **A**nalysis based on **G**enomic **E**diting data (development)
+# cage
+**C**RISPR KO **A**nalysis based on **G**enomic **E**diting data
 
 ## Introduction
 A CRISPR-cas9 based Genome Editing data analysis pipeline, for the analysis of indels and microhomology patterns, the identification of personalized features correlated to sgRNA KO efficiency on heterogeneous experimental conditions, and the evaluation of the sgRNA KO efficiency based on the CRISPR-Cas9

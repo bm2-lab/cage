@@ -9,6 +9,7 @@ def main():
     str_usage = 'python cage.py <command> [options]'
     str_desc = r'''
 CRISPR KO Analysis based on Genomic Editing data
+Version: 1.0.0
 ------------------------------------------------
 A CRISPR-cas9 based Genome Editing data analysis pipeline, 
 for the analysis of indels and microhomology patterns from 
@@ -18,8 +19,6 @@ CRISPR-Cas9 Knock-Out NGS data.
                                  usage=str_usage,
                                  description=str_desc,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
-
-    p.add_argument('-v', '--version', action='version', version='%(prog)s 3.0.0(dev)')
 
     sp = p.add_subparsers(title='Command', metavar='')
 
