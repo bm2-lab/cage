@@ -109,7 +109,7 @@ python cage.py <command> [option] ...
 3. `mh`    Microhomology Detection
 4. `indel` Indel Frameshifting Paradigm Analysis
 5. `fs`    Feature selection and model prediction on clearly defined sgRNA KO efficiency
-6. `mt`    Feature Selection with Multi-task Group LASSO on clearly defined sgRNA KO efficiency
+6. `mt`    Feature Selection with Multi-task Group LASSO on clearly defined sgRNA KO efficiency for cross-platform data
 7. `eval`  sgRNA KO efficiency evaluation and the scanning of a given genome region for sgRNA design
 8. `vis`   Visualization of feature selection result
 
@@ -220,7 +220,7 @@ python cage.py fs -i <label file>
 ```
 For more detail on the options, see `python cage.py fs -h`.
 
-## Feature Selection with Multi-task Group LASSO on clearly defined sgRNA KO efficiency
+## Feature Selection with Multi-task Group LASSO on clearly defined sgRNA KO efficiency for cross-platform data
 ```
 python cage.py mt -i [<label file> [<label file> ...]]
                   -s [<sg file> [<sg file> ...]]
