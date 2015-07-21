@@ -1,6 +1,5 @@
 import os
 from indel_integrator import *
-from src.core import seqfs
 
 def AnalyzeIndel(opts):
     str_nm = os.path.basename(os.path.splitext(opts.samind)[0])
