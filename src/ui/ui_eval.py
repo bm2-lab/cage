@@ -6,7 +6,7 @@ def ParseEval(p_ev):
     ev_inp.add_argument('-b', dest='beg', help='Start Coordinate', type=int, metavar='<int>')
     ev_inp.add_argument('-e', dest='end', help='End Coordinate', type=int, metavar='<int>')
     ev_inp.add_argument('-s', dest='sg', help='sgRNA Information Table', metavar='<sg file>')
-    ev_inp.add_argument('-f', dest='sfunc', required=True, help='Score Function (required)', metavar='<score function file>')
+    ev_inp.add_argument('-m', dest='sfunc', required=True, help='Evaluation Model (required)', metavar='<pkl file>')
 
     ev_otp = p_ev.add_argument_group('Output options')
     ev_otp.add_argument('-o', dest='tdir', help='Output Directory, default = .', default='.', metavar='<output directory>')

@@ -19,11 +19,11 @@ determinants from heterogeneous genome editing data.
 4. CAGE provides an personalized scoring framework for on-target sgRNA design based on the derived sequence determinants for specific cell types or organisms.
 
 Currently CAGE records the optimal sgRNA KO efficiency prediction
-models and the personalized score functions in sgRNA design for the
+models and the personalized evaluation models in sgRNA design for the
 following 7 cell types. The optimal results for new cell types as well
-as the the current ones will be updated timely. The users can select the existed score function for a specific cell type for sgRNA design, or they can use their own sgRNA KO data to generate a new personalized score function for a new cell type for furthur sgRNA KO efficiency evaluation.
+as the the current ones will be updated timely. The users can select the existed evaluation model for a specific cell type for sgRNA design, or they can use their own sgRNA KO data to generate a new personalized evaluation model for a new cell type for furthur sgRNA KO efficiency evaluation.
 
-Score Function | Species | Cell Type | KO Efficiency Measurement | Data Type | Learning Model | Performance | Actual sgRNA Library Size | Accession | Time Stamp
+Evaluation Model| Species | Cell Type | KO Efficiency Measurement | Data Type | Learning Model | Performance | Actual sgRNA Library Size | Accession | Time Stamp
 ---------|-----|-----|-------|---------|-------|------|-------|----|------
 a375_1 | Homo sapiens | A375 | See [Doench et al.][1] | numerical | LASSO | r2=0.64 | 1248 | - | 2015-7-16
 el4_1 | Mus musculus | EL4 | See [Doench et al.][1] | numerical | LASSO | r2=0.65 | 858 | - | 2015-7-16
@@ -122,7 +122,7 @@ mnst file | .mnst | microhomology information table
 iost file | .iost | sgRNA-indel table
 seq file | .seq | original sequence feature table
 fesrep file | _fesrep.xml | feature selection and model prediction report
-pkl file | .pkl | score function file
+pkl file | .pkl | evaluation model file
 st file | .st | evaluation result file
 label file | (arbitrary) | user-customized evaluation file for feature selection and model prediction
 
@@ -236,7 +236,7 @@ python cage.py mt -i [<label file> [<label file> ...]]
 python cage.py eval -c <target chromosome>
                     -b <start coordinate>
                     -e <end coordinate>
-                    -f <score function file>
+                    -m <pkl file>
                     -o <output directory>
 					-g <reference genome>
 					-d <two-sided|pos|neg> (scan direction)
@@ -246,7 +246,7 @@ python cage.py eval -c <target chromosome>
 * Evaluation with sgRNA Information Table
 ```
 python cage.py eval -s <sg file>
-                    -f <score function file>
+                    -m <pkl file>
                     -o <output directory>
 					-g <reference genome>
 ```
