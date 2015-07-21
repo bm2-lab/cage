@@ -105,7 +105,7 @@ python cage.py <command> [option] ...
 
 ## Command
 1. `sg`    Process sgRNA sequences into sgRNA information table
-2. `prep`  Process NGS data into sgRNA-Indel Table
+2. `prep`  Process NGS data
 3. `mh`    Microhomology Detection
 4. `indel` Indel frameshifting paradigm analysis
 5. `fs`    Feature selection and model prediction on clearly defined sgRNA KO efficiency
@@ -117,9 +117,9 @@ python cage.py <command> [option] ...
 File Type | Suffix | Usage
 ----|----|----
 sg file | .sg | sgRNA information table
-samind file | .samind | sgRNA-indel table
+samind file | .samind | reads mapping result
 mnst file | .mnst | microhomology information table
-iost file | .iost | indel information table that can be used as label file
+iost file | .iost | sgRNA-indel table
 seq file | .seq | original sequence feature table
 fesrep file | _fesrep.xml | feature selection and model prediction report
 pkl file | .pkl | score function file
@@ -148,7 +148,6 @@ python cage.py sg -s <sgRNA.fq>
 For more detail on the options, see `python cage.py sg -h`.
 
 ## NGS data preprocessing
-Generate sgRNA-Indel Table (samind file)
 * Single-end
 ```
 python cage.py prep -s <sg file>
@@ -178,7 +177,7 @@ python cage.py mh -i <samind file>
 For more detail on the options, see `python cage.py mh -h`.
 
 ## Indel frameshifting paradigm analysis
-Generate indel information table (iost file)
+Generate sgRNA-indel table (iost file)
 ```
 python cage.py indel -i <samind file>
                      -s <sg file>
