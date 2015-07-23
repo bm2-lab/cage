@@ -1,5 +1,5 @@
 # CAGE
-**C**RISPR KO **A**nalysis based on **G**enomic **E**diting data
+**C**RISPR KO **A**nalysis based on **G**enomic **E**diting data —— Towards personalized sgRNA design on heterogeneous experimental conditions
 
 ## Introduction
 A CRISPR-cas9 based Genome Editing data analysis pipeline, for the analysis of indels and microhomology patterns, the identification of personalized features correlated to sgRNA KO efficiency on heterogeneous experimental conditions, and the evaluation of the sgRNA KO efficiency based on the CRISPR-Cas9
@@ -20,7 +20,7 @@ determinants from heterogeneous genome editing data.
 
 Currently CAGE records the optimal sgRNA KO efficiency prediction
 models and the personalized evaluation models in sgRNA design for the
-following 7 cell types. The optimal results for new cell types as well
+following different cell types. The optimal results for new cell types as well
 as the the current ones will be updated timely. The users can select the existed evaluation model for a specific cell type for sgRNA design, or they can use their own sgRNA KO data to generate a new personalized evaluation model for a new cell type for furthur sgRNA KO efficiency evaluation.
 
 Evaluation Model| Species | Cell Type | KO Efficiency Measurement | Data Type | Learning Model | Performance | Actual sgRNA Library Size | Accession | Time Stamp
