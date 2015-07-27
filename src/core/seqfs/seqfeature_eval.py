@@ -20,7 +20,7 @@ def FeatureEval(str_f_iosg, str_f_md, str_refgem, str_of_seq, str_of_st):
     dfm['score'] = y
 
     dfm_y = dfm[[0,-1]]
-    dfm_iosg = pd.read_csv(str_f_iosg, sep='\t', index_col=None)
+    dfm_iosg = pd.read_csv(str_f_iosg, sep='\t', header=None, index_col=None)
     dfm_iosg.columns = ['sgID', 'chrom', 'strand', 'sbeg', 'send', 'qseq', 'c_site']
     dfm = pd.merge(dfm_iosg, dfm_y, on='sgID')
     dfm.drop('c_site', axis=1, inplace=True)
