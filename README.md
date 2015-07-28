@@ -1,13 +1,13 @@
 # CAGE
-**C**RISPR KO **A**nalysis based on **G**enomic **E**diting data —— Towards personalized sgRNA design on heterogeneous experimental conditions
+**C**RISPR KO **A**nalysis based on **G**enomic **E**diting data —— Toward personalized sgRNA design in heterogeneous experimental conditions
 
 ## Introduction
-A CRISPR-cas9 based Genome Editing data analysis pipeline, for the analysis of indels and microhomology patterns, the identification of personalized features correlated to sgRNA KO efficiency on heterogeneous experimental conditions, and the evaluation of the sgRNA KO efficiency based on the CRISPR-Cas9
+A CRISPR-cas9 based Genome-diting data analysis pipeline, for the analysis of indels and microhomology patterns, the identification of personalized features correlated to sgRNA KO efficiency on heterogeneous experimental conditions, and the evaluation of the sgRNA KO efficiency based on the CRISPR-Cas9
 Knock-Out NGS data or the sgRNA KO assay data.
 
 The ultimate goals of CAGE:
 
-1. CAGE provides a standard CROWDSOURCING platform for the users to
+1. CAGE provides a standard CROWDSOURCING platform for users to
 share the CRISPR-Cas9 based gene KO data.
 
 2. CAGE provides an efficient interface to analyze and visualize the
@@ -16,12 +16,12 @@ CRISPR-based KO NGS data.
 3. CAGE provides a robust learning pipeline to derive the sequence
 determinants from heterogeneous genome editing data.
 
-4. CAGE provides an personalized scoring framework for on-target sgRNA design based on the derived sequence determinants for specific cell types or organisms.
+4. CAGE provides an personalized evaluation framework for on-target sgRNA design based on the derived sequence determinants torward specific cell types or organisms.
 
 Currently CAGE records the optimal sgRNA KO efficiency prediction
 models and the personalized evaluation models in sgRNA design for the
 following different cell types. The optimal results for new cell types as well
-as the the current ones will be updated timely. The users can select the existed evaluation model for a specific cell type for sgRNA design, or they can use their own sgRNA KO data to generate a new personalized evaluation model for a new cell type for furthur sgRNA KO efficiency evaluation.
+as the the current ones will be updated regularly. Users can select the existing evaluation model for a specific cell type for sgRNA design, or they can use their own sgRNA KO data to generate a new personalized evaluation model for a new cell type for furthur sgRNA KO efficiency evaluation.
 
 Evaluation Model| Species | Cell Type | KO Efficiency Measurement | Data Type | Learning Model | Performance | Actual sgRNA Library Size | Accession | Time Stamp
 ---------|-----|-----|-------|---------|-------|------|-------|----|------
