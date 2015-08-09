@@ -2,8 +2,8 @@
 **C**RISPR KO **A**nalysis based on **G**enomic **E**diting data —— Toward personalized sgRNA design in heterogeneous experimental conditions
 
 ## Introduction
-A CRISPR-cas9 based genome-editing data analysis pipeline, for the analysis of indels and microhomology patterns, the identification of personalized features correlated to sgRNA KO efficiency on heterogeneous experimental conditions, and the evaluation of the sgRNA KO efficiency based on the CRISPR-Cas9
-Knock-Out NGS data or the sgRNA KO assay data.
+A CRISPR-cas9 based genome-editing data analysis resource and platform, for the analysis of indels and microhomology patterns, the identification of personalized features correlated to sgRNA KO efficiency on heterogeneous experimental conditions, and the evaluation of the sgRNA KO efficiency based on the CRISPR-Cas9
+KO NGS data or the sgRNA KO assay data.
 
 The ultimate goals of CAGE:
 
