@@ -33,7 +33,7 @@ hela_1 | Homo sapiens | Hela | OTF Ratio | numerical | LASSO | r2=0.84| 68 | [SR
 dr_1 | Danio rerio | *AB/Tu | OTF Ratio | numerical | LASSO | r2=0.92| 47 | [SRP052749][5] | 2015-7-16
 hl60_nonribo | Homo sapiens | HL60 | See [Xu et al.][6] | categorical|Logistic | AUC=0.86 | 908 | - | 2015-7-16
 hl60_ribo | Homo sapiens | HL60 | See [Xu et al.][6] | categorical| Logistic | AUC=0.90 | 373 | - | 2015-7-16
-mesc_2 | Mus musculus | mESC | See [Xu et al.][6] | categorical | Logistic | AUC=0.80 | 86887 | - | 2015-7-16
+mesc_2 | Mus musculus | mESC | See [Xu et al.][6] | categorical | Logistic | AUC=0.80 | 1028 | - | 2015-7-16
 hek293t_1 | Homo sapiens | HEK293T | See [Chari et al.][7] | categorical| Logistic | AUC=0.83 | 279 | - | 2015-7-23
 
 [1]: http://www.nature.com/nbt/journal/v32/n12/full/nbt.3026.html
