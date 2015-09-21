@@ -2,7 +2,7 @@ from __future__ import division
 
 import numpy as np
 from sklearn import linear_model
-from sklearn.cross_validation import ShuffleSplit
+from sklearn.cross_validation import KFold
 from sklearn import preprocessing as prep
 from sklearn.metrics import r2_score
 from scipy.stats import pearsonr
@@ -10,31 +10,26 @@ from collections import namedtuple
 import warnings
 from sklearn.utils import ConvergenceWarning
 
-Cvset = namedtuple('Cv', ['xtr', 'ytr', 'xte', 'yte'])
 Md = namedtuple('Md', ['model', 'idx', 'cor', 'r2'])
 
-def LassoSelector(x, y, cv, niter, njob):
-    t_size=1 / cv
+def LassoSelector(x, y, cv, njob):
     cor_score = lambda x, y: pearsonr(x, y)[0]
     
     lr = linear_model.LinearRegression(n_jobs=njob)
+    skf = KFold(len(y), n_folds=cv)
     model = linear_model.LassoLarsCV(fit_intercept=False, cv=cv, n_jobs=njob)
     with warnings.catch_warnings():
         warnings.simplefilter('ignore', UserWarning)
         warnings.simplefilter('ignore', ConvergenceWarning)
         model.fit(x, y)
     columns = np.arange(x.shape[1])[model.coef_ != 0]
+    
+    mdl_eval = lambda func: lambda idx_tr, idx_te: func(y[idx_te], lr.fit(x[idx_tr][:,columns], y[idx_tr]).predict(x[idx_te][:,columns]))
+    res_eval = lambda func: np.average(map(mdl_eval(func), *zip(*[(idx_tr, idx_te) for idx_tr, idx_te in skf])))
 
-    l1cor = []
-    l1r2 = []
-
-    gn_cvsetl1 = (Cvset(x[i][:,columns], y[i], x[j][:,columns], y[j]) for (i, j) in ShuffleSplit(len(y), n_iter=niter, test_size=t_size))
-
-    for cvt in gn_cvsetl1:
-        lr.fit(cvt.xtr, cvt.ytr)
-        l1cor.append(cor_score(cvt.yte, lr.predict(cvt.xte)))
-        l1r2.append(r2_score(cvt.yte, lr.predict(cvt.xte)))
+    l1r2 = res_eval(r2_score)
+    l1cor = res_eval(cor_score)
 
     lr.fit(x[:,columns], y)
         
-    return Md(model=lr, idx=columns, cor=np.mean(l1cor), r2=np.mean(l1r2))
+    return Md(model=lr, idx=columns, cor=l1cor, r2=l1r2)

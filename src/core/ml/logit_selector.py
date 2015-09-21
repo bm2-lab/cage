@@ -2,7 +2,7 @@ from __future__ import division
 
 import numpy as np
 from sklearn import preprocessing as prep
-from sklearn.cross_validation import ShuffleSplit
+from sklearn.cross_validation import StratifiedKFold
 from sklearn.linear_model import LogisticRegression
 from sklearn.linear_model import LogisticRegressionCV
 from sklearn.metrics import accuracy_score
@@ -14,45 +14,39 @@ from collections import namedtuple
 import warnings
 from sklearn.utils import ConvergenceWarning
 
-Cvset = namedtuple('Cv', ['xtr', 'ytr', 'xte', 'yte'])
 Mdc = namedtuple('Mdc', ['model', 'idx', 'accu', 'prec', 'rec', 'f1', 'au'])
 
-def __Auc(cls, xte, yte):
-    ypo = cls.predict_proba(xte)
-    flt_auc = roc_auc_score(yte, ypo[:,1])
-    return flt_auc
 
-def LogitSelector(x, y, cv, niter, njob):
-    t_size=1 / cv
+
+def LogitSelector(x, y, cv, njob):
 
     lb = prep.LabelBinarizer()
     y = lb.fit_transform(y).ravel()
 
-    model = LogisticRegressionCV(penalty='l1', solver='liblinear', refit=False, cv=cv, n_jobs=njob)
+    cls = LogisticRegression()
+    def __Auc(xte, yte):
+        ypo = cls.predict_proba(xte)
+        flt_auc = roc_auc_score(yte, ypo[:,1])
+        return flt_auc
+    
+    skf = StratifiedKFold(y, n_folds=cv)
+    model = LogisticRegressionCV(penalty='l1', solver='liblinear', fit_intercept=False, cv=cv, n_jobs=njob)
     with warnings.catch_warnings():
         warnings.simplefilter('ignore', UserWarning)
         warnings.simplefilter('ignore', ConvergenceWarning)
         model.fit(x, y)
     columns = np.arange(x.shape[1])[model.coef_.ravel() != 0]
+    
+    mdl_eval = lambda func: lambda idx_tr, idx_te: func(y[idx_te], cls.fit(x[idx_tr][:,columns], y[idx_tr]).predict(x[idx_te][:,columns]))
+    auc_eval = lambda idx_tr, idx_te: roc_auc_score(y[idx_te], cls.fit(x[idx_tr][:,columns], y[idx_tr]).predict_proba(x[idx_te][:,columns])[:,1])
+    res_eval = lambda func: np.average(map(mdl_eval(func), *zip(*[(idx_tr, idx_te) for idx_tr, idx_te in skf])))
 
-    accu = []
-    prec = []
-    rec = []
-    f1 = []
-    au = []
-    cls = LogisticRegression()
-    gn_cvset = (Cvset(x[i][:, columns], y[i], x[j][:, columns], y[j]) for (i, j) in ShuffleSplit(len(y), n_iter=niter, test_size=t_size))
-
-    for cvt in gn_cvset:
-        cls.fit(cvt.xtr, cvt.ytr)
-        accu.append(accuracy_score(cvt.yte, cls.predict(cvt.xte)))
-        prec.append(precision_score(cvt.yte, cls.predict(cvt.xte)))
-        rec.append(recall_score(cvt.yte, cls.predict(cvt.xte)))
-        f1.append(f1_score(cvt.yte, cls.predict(cvt.xte)))
-        au.append(__Auc(cls, cvt.xte, cvt.yte))
+    accu = res_eval(accuracy_score)
+    prec = res_eval(precision_score)
+    rec = res_eval(recall_score)
+    f1 = res_eval(f1_score)
+    au = np.average(map(auc_eval, *zip(*[(idx_tr, idx_te) for idx_tr, idx_te in skf])))
 
     cls.fit(x[:,columns], y)
-    return Mdc(model=cls, idx=columns, accu=np.mean(accu),
-               prec=np.mean(prec), rec=np.mean(rec), f1=np.mean(f1),
-               au=np.mean(au))
+    return Mdc(model=cls, idx=columns, accu=accu, prec=prec, rec=rec, f1=f1, au=au)
 

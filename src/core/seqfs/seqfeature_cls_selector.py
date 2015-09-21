@@ -7,8 +7,7 @@ from seqfeature_extractor import ExtractSeqFeature
 from src.core import ml
 
 
-
-Frc = namedtuple('Frc', ['fs', 'ups', 'dws', 'niter', 'cv', 'accu', 'prec', 'rec', 'f1', 'au'])
+Frc = namedtuple('Frc', ['fs', 'ups', 'dws', 'cv', 'accu', 'prec', 'rec', 'f1', 'au'])
 
 def __SaveFeatureReport(frc, str_of_fesrep):
     f_fesrep = open(str_of_fesrep, 'w')
@@ -23,7 +22,6 @@ def __SaveFeatureReport(frc, str_of_fesrep):
     enode_fes.set('ups', str(frc.ups))
     enode_fes.set('dws', str(frc.dws))
     
-    enode_cv.set('n_iter', str(frc.niter))
     enode_cv.set('fold', str(frc.cv))
 
     enode_met.append(etree.Element('accuracy', value='%.3f'% frc.accu))
@@ -39,7 +37,7 @@ def __SaveFeatureReport(frc, str_of_fesrep):
     
 def LogitFeatureSelection(str_f_iosg, str_f_st, str_refgem,
                           str_of_seq, str_of_fesrep, str_of_md,
-                          int_ups=30, int_dws=27, cv=5, niter=1000, njob=1):
+                          int_ups=30, int_dws=27, cv=5, njob=1):
     
     dfm_x = ExtractSeqFeature(str_f_iosg, str_refgem, int_ups, int_dws)
     dfm_x.to_csv(str_of_seq, sep='\t', index=None)
@@ -52,9 +50,9 @@ def LogitFeatureSelection(str_f_iosg, str_f_st, str_refgem,
     x = np.array(dfm_x, dtype=np.double)
     y = np.array(dfm_y, dtype=np.int)
 
-    mdc = ml.LogitSelector(x, y, cv, niter, njob)
+    mdc = ml.LogitSelector(x, y, cv, njob)
     lst_fs = [i for i in dfm_x.columns[mdc.idx]]
-    frc = Frc(fs=lst_fs, ups=int_ups, dws=int_dws, niter=niter,
+    frc = Frc(fs=lst_fs, ups=int_ups, dws=int_dws,
               cv=cv, accu=mdc.accu, prec=mdc.prec, rec=mdc.rec,
               f1=mdc.f1, au=mdc.au)
     __SaveFeatureReport(frc, str_of_fesrep)
@@ -67,7 +65,7 @@ def LogitFeatureSelection(str_f_iosg, str_f_st, str_refgem,
 def LogitRegionOptimizer(str_f_iosg, str_f_st, str_refgem,
                          str_of_seq, str_of_fesrep, str_of_md,
                          int_regn_start=0, int_regn_end=100, int_regn_step=5,
-                         cv=5, niter=1000, njob=1):
+                         cv=5, njob=1):
     int_ups_regn = np.arange(int_regn_start, int_regn_end+1, int_regn_step)
     int_dws_regn = np.where((int_ups_regn-3)>0, int_ups_regn-3, 0)
     arr_accu = np.zeros_like(int_ups_regn, dtype=np.double)
@@ -80,7 +78,7 @@ def LogitRegionOptimizer(str_f_iosg, str_f_st, str_refgem,
         dfm_y = dfm_y[[-1]]
         x = np.array(dfm_x, dtype=np.double)
         y = np.array(dfm_y, dtype=np.int)
-        arr_accu[i] = ml.LogitSelector(x, y, cv, niter, njob).accu
+        arr_accu[i] = ml.LogitSelector(x, y, cv, njob).accu
     int_ups = int_ups_regn[arr_accu.argmax()]
     int_dws = int_dws_regn[arr_accu.argmax()]
     dfm_x = ExtractSeqFeature(str_f_iosg, str_refgem, int_ups, int_dws)
@@ -90,9 +88,9 @@ def LogitRegionOptimizer(str_f_iosg, str_f_st, str_refgem,
     dfm_y = dfm_y[[-1]]
     x = np.array(dfm_x, dtype=np.double)
     y = np.array(dfm_y, dtype=np.int)
-    mdc = ml.LogitSelector(x, y, cv, niter, njob)
+    mdc = ml.LogitSelector(x, y, cv, njob)
     lst_fs = [i for i in dfm_x.columns[mdc.idx]]
-    frc = Frc(fs=lst_fs, ups=int_ups, dws=int_dws, niter=niter,
+    frc = Frc(fs=lst_fs, ups=int_ups, dws=int_dws,
               cv=cv, accu=mdc.accu, prec=mdc.prec, rec=mdc.rec,
               f1=mdc.f1, au=mdc.au)
     __SaveFeatureReport(frc, str_of_fesrep)

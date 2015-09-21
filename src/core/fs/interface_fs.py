@@ -22,7 +22,7 @@ def GeneralFs(opts):
             seqfs.LassoFeatureSelection(str_path_sg, str_path_lab, opts.ref, 
                                         str_path_seq, str_path_fesrep,
                                         str_path_model, opts.ups, opts.dws,
-                                        opts.cv, opts.niter, opts.njob)
+                                        opts.cv, opts.njob)
             print('Done')
         else:
             print('Detecting Optimal Feature Space...')
@@ -30,7 +30,7 @@ def GeneralFs(opts):
                                        str_path_seq, str_path_fesrep,
                                        str_path_model, opts.ir,
                                        opts.ir+opts.rad, opts.step, opts.cv,
-                                       opts.niter, opts.njob)
+                                       opts.njob)
             print('Done')
     elif opts.med == 'logit':
         if opts.auto == False:
@@ -38,7 +38,7 @@ def GeneralFs(opts):
             seqfs.LogitFeatureSelection(str_path_sg, str_path_lab, opts.ref, 
                                         str_path_seq, str_path_fesrep,
                                         str_path_model, opts.ups, opts.dws,
-                                        opts.cv, opts.niter, opts.njob)
+                                        opts.cv, opts.njob)
             print('Done')
         else:
             print('Detecting Optimal Feature Space...')
@@ -46,7 +46,7 @@ def GeneralFs(opts):
                                        str_path_seq, str_path_fesrep,
                                        str_path_model, opts.ir,
                                        opts.ir+opts.rad, opts.step, opts.cv,
-                                       opts.niter, opts.njob)
+                                       opts.njob)
             print('Done')
         
 

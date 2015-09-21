@@ -7,8 +7,7 @@ from seqfeature_extractor import ExtractSeqFeature
 from src.core import ml
 
 
-
-Fr = namedtuple('Fr', ['fs', 'ups', 'dws', 'niter', 'cv', 'cor', 'r2'])
+Fr = namedtuple('Fr', ['fs', 'ups', 'dws', 'cv', 'cor', 'r2'])
 
 def __SaveFeatureReport(fr, str_of_fesrep):
     f_fesrep = open(str_of_fesrep, 'w')
@@ -22,8 +21,6 @@ def __SaveFeatureReport(fr, str_of_fesrep):
     enode_fes.set('n', str(len(fr.fs)))
     enode_fes.set('ups', str(fr.ups))
     enode_fes.set('dws', str(fr.dws))
-    
-    enode_cv.set('n_iter', str(fr.niter))
     enode_cv.set('fold', str(fr.cv))
 
     enode_met.append(etree.Element('pearson_cor', value='%.3f'% fr.cor))
@@ -35,7 +32,7 @@ def __SaveFeatureReport(fr, str_of_fesrep):
     
 def LassoFeatureSelection(str_f_iosg, str_f_st, str_refgem,
                           str_of_seq, str_of_fesrep, str_of_md,
-                          int_ups=30, int_dws=27, cv=5, niter=1000, njob=1):
+                          int_ups=30, int_dws=27, cv=5, njob=1):
     
     dfm_x = ExtractSeqFeature(str_f_iosg, str_refgem, int_ups, int_dws)
     dfm_x.to_csv(str_of_seq, sep='\t', index=None)
@@ -48,9 +45,9 @@ def LassoFeatureSelection(str_f_iosg, str_f_st, str_refgem,
     x = np.array(dfm_x, dtype=np.double)
     y = np.array(dfm_y, dtype=np.double).ravel()
 
-    md = ml.LassoSelector(x, y, cv, niter, njob)
+    md = ml.LassoSelector(x, y, cv, njob)
     lst_fs = [i for i in dfm_x.columns[md.idx]]
-    fr = Fr(fs=lst_fs, ups=int_ups, dws=int_dws, niter=niter, cv=cv,
+    fr = Fr(fs=lst_fs, ups=int_ups, dws=int_dws, cv=cv,
             cor=md.cor, r2=md.r2)
     __SaveFeatureReport(fr, str_of_fesrep)
     mdl = dict(med='lasso', model=md.model, idx=md.idx,
@@ -62,7 +59,7 @@ def LassoFeatureSelection(str_f_iosg, str_f_st, str_refgem,
 def LassoRegionOptimizer(str_f_iosg, str_f_st, str_refgem,
                          str_of_seq, str_of_fesrep, str_of_md,
                          int_regn_start=0, int_regn_end=100, int_regn_step=5,
-                         cv=5, niter=1000, njob=1):
+                         cv=5, njob=1):
     int_ups_regn = np.arange(int_regn_start, int_regn_end+1, int_regn_step)
     int_dws_regn = np.where((int_ups_regn-3)>0, int_ups_regn-3, 0)
     arr_r2 = np.zeros_like(int_ups_regn, dtype=np.double)
@@ -75,7 +72,7 @@ def LassoRegionOptimizer(str_f_iosg, str_f_st, str_refgem,
         dfm_y = dfm_y[[-1]]
         x = np.array(dfm_x, dtype=np.double)
         y = np.array(dfm_y, dtype=np.double).ravel()
-        arr_r2[i] = ml.LassoSelector(x, y, cv, niter, njob).r2
+        arr_r2[i] = ml.LassoSelector(x, y, cv, njob).r2
     int_ups = int_ups_regn[arr_r2.argmax()]
     int_dws = int_dws_regn[arr_r2.argmax()]
     dfm_x = ExtractSeqFeature(str_f_iosg, str_refgem, int_ups, int_dws)
@@ -85,9 +82,9 @@ def LassoRegionOptimizer(str_f_iosg, str_f_st, str_refgem,
     dfm_y = dfm_y[[-1]]
     x = np.array(dfm_x, dtype=np.double)
     y = np.array(dfm_y, dtype=np.double).ravel()
-    md = ml.LassoSelector(x, y, cv, niter, njob)
+    md = ml.LassoSelector(x, y, cv, njob)
     lst_fs = [i for i in dfm_x.columns[md.idx]]
-    fr = Fr(fs=lst_fs, ups=int_ups, dws=int_dws, niter=niter,
+    fr = Fr(fs=lst_fs, ups=int_ups, dws=int_dws,
             cv=cv, cor=md.cor, r2=md.r2)
     __SaveFeatureReport(fr, str_of_fesrep)
     mdl = dict(med='lasso', model=md.model, idx=md.idx,

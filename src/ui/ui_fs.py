@@ -20,7 +20,6 @@ def ParseFs(p_fs):
     fs_fs = p_fs.add_argument_group('Feature Selection options')
     fs_fs.add_argument('-m', dest='med', required=True, help='Method Selection (required)', choices=('lasso', 'logit'), metavar='<lasso|logit>')
     fs_fs.add_argument('-c', dest='cv', help='Folds for Cross Validation (default = 5)', default=5, type=int, metavar='<int>')
-    fs_fs.add_argument('-n', dest='niter', help='Iteration Times for Cross Validation (default = 1000)', default=1000, type=int, metavar='<int>')
     fs_fs.add_argument('-j', dest='njob', help='Number of CPU cores used (default = 1; -1 means all cores)', default=1, type=int, metavar='<int>')
 
 
