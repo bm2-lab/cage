@@ -27,14 +27,14 @@ Evaluation Model| Species | Cell Type | KO Efficiency Measurement | Data Type | 
 ---------|-----|-----|-------|---------|-------|------|-------|----|------
 a375_1 | Homo sapiens | A375 | See [Doench et al.][1] | numerical | LASSO | r2=0.64 | 1248 | - | 2015-7-16
 el4_1 | Mus musculus | EL4 | See [Doench et al.][1] | numerical | LASSO | r2=0.65 | 858 | - | 2015-7-16
-mesc_1 | Mus musculus | mESC | OTF Ratio | numerical | LASSO | r2=0.66 | 99 | [ERP003292][2] | 2015-7-16
-rn2c_1 | Mus musculus | RN2c | OTF Ratio | numerical | LASSO | r2=0.85| 26 | [SRP057117][3] | 2015-7-16
-hela_1 | Homo sapiens | Hela | OTF Ratio | numerical | LASSO | r2=0.84| 68 | [SRP042061][4] | 2015-7-16
-dr_1 | Danio rerio | *AB/Tu | OTF Ratio | numerical | LASSO | r2=0.92| 47 | [SRP052749][5] | 2015-7-16
-hl60_nonribo | Homo sapiens | HL60 | See [Xu et al.][6] | categorical|Logistic | AUC=0.86 | 908 | - | 2015-7-16
-hl60_ribo | Homo sapiens | HL60 | See [Xu et al.][6] | categorical| Logistic | AUC=0.90 | 373 | - | 2015-7-16
-mesc_2 | Mus musculus | mESC | See [Xu et al.][6] | categorical | Logistic | AUC=0.80 | 1028 | - | 2015-7-16
-hek293t_1 | Homo sapiens | HEK293T | See [Chari et al.][7] | categorical| Logistic | AUC=0.83 | 279 | - | 2015-7-23
+mesc_1 | Mus musculus | mESC | OTF Ratio | numerical | LASSO | r2=0.72 | 99 | [ERP003292][2] | 2015-7-16
+rn2c_1 | Mus musculus | RN2c | OTF Ratio | numerical | LASSO | r2=0.89| 26 | [SRP057117][3] | 2015-7-16
+hela_1 | Homo sapiens | Hela | OTF Ratio | numerical | LASSO | r2=0.87| 68 | [SRP042061][4] | 2015-7-16
+dr_1 | Danio rerio | *AB/Tu | OTF Ratio | numerical | LASSO | r2=0.91| 47 | [SRP052749][5] | 2015-7-16
+hl60_nonribo | Homo sapiens | HL60 | See [Xu et al.][6] | categorical|Logistic | AUC=0.76 | 908 | - | 2015-7-16
+hl60_ribo | Homo sapiens | HL60 | See [Xu et al.][6] | categorical| Logistic | AUC=0.79 | 373 | - | 2015-7-16
+mesc_2 | Mus musculus | mESC | See [Xu et al.][6] | categorical | Logistic | AUC=0.81 | 1028 | - | 2015-7-16
+hek293t_1 | Homo sapiens | HEK293T | See [Chari et al.][7] | categorical| Logistic | AUC=0.77 | 279 | - | 2015-7-23
 
 [1]: http://www.nature.com/nbt/journal/v32/n12/full/nbt.3026.html
 
