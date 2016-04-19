@@ -25,8 +25,8 @@ as the the current ones will be updated regularly. Users can select the existing
 
 Evaluation Model| Species | Cell Type | KO Efficiency Measurement | Data Type | Learning Model | Performance | Actual sgRNA Library Size | Accession | Time Stamp
 ---------|-----|-----|-------|---------|-------|------|-------|----|------
-a375_1 | Homo sapiens | A375 | See [Doench et al.][1] | numerical | LASSO | r2=0.64 | 1248 | - | 2015-7-16
-el4_1 | Mus musculus | EL4 | See [Doench et al.][1] | numerical | LASSO | r2=0.65 | 858 | - | 2015-7-16
+a375_1 | Homo sapiens | A375 | See [Doench et al.][1] | numerical | LASSO | r2=0.504 | 1248 | - | 2015-7-16
+el4_1 | Mus musculus | EL4 | See [Doench et al.][1] | numerical | LASSO | r2=0.508 | 858 | - | 2015-7-16
 mesc_1 | Mus musculus | mESC | OTF Ratio | numerical | LASSO | r2=0.72 | 99 | [ERP003292][2] | 2015-7-16
 rn2c_1 | Mus musculus | RN2c | OTF Ratio | numerical | LASSO | r2=0.89| 26 | [SRP057117][3] | 2015-7-16
 hela_1 | Homo sapiens | Hela | OTF Ratio | numerical | LASSO | r2=0.87| 68 | [SRP042061][4] | 2015-7-16
