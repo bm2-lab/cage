@@ -23,18 +23,18 @@ models and the personalized evaluation models in sgRNA design for the
 following different cell types. The optimal results for new cell types as well
 as the the current ones will be updated regularly. Users can select the existing evaluation model for a specific cell type for sgRNA design, or they can use their own sgRNA KO data to generate a new personalized evaluation model for a new cell type for furthur sgRNA KO efficiency evaluation.
 
-Evaluation Model| Species | Cell Type | KO Efficiency Measurement | Data Type | Learning Model | Performance | Actual sgRNA Library Size | Accession | Time Stamp
+Evaluation Model| Species | Cell Type | KO Efficiency Measurement | Data Type | Learning Model | Actual sgRNA Library Size | Accession | Time Stamp
 ---------|-----|-----|-------|---------|-------|------|-------|----|------
-a375_1 | Homo sapiens | A375 | See [Doench et al.][1] | numerical | LASSO | r2=0.504 | 1248 | - | 2015-7-16
-el4_1 | Mus musculus | EL4 | See [Doench et al.][1] | numerical | LASSO | r2=0.508 | 858 | - | 2015-7-16
-mesc_1 | Mus musculus | mESC | OTF Ratio | numerical | LASSO | r2=0.72 | 99 | [ERP003292][2] | 2015-7-16
-rn2c_1 | Mus musculus | RN2c | OTF Ratio | numerical | LASSO | r2=0.89| 26 | [SRP057117][3] | 2015-7-16
-hela_1 | Homo sapiens | Hela | OTF Ratio | numerical | LASSO | r2=0.87| 68 | [SRP042061][4] | 2015-7-16
-dr_1 | Danio rerio | *AB/Tu | OTF Ratio | numerical | LASSO | r2=0.91| 47 | [SRP052749][5] | 2015-7-16
-hl60_nonribo | Homo sapiens | HL60 | See [Xu et al.][6] | categorical|Logistic | AUC=0.76 | 908 | - | 2015-7-16
-hl60_ribo | Homo sapiens | HL60 | See [Xu et al.][6] | categorical| Logistic | AUC=0.79 | 373 | - | 2015-7-16
-mesc_2 | Mus musculus | mESC | See [Xu et al.][6] | categorical | Logistic | AUC=0.81 | 1028 | - | 2015-7-16
-hek293t_1 | Homo sapiens | HEK293T | See [Chari et al.][7] | categorical| Logistic | AUC=0.77 | 279 | - | 2015-7-23
+a375_1 | Homo sapiens | A375 | See [Doench et al.][1] | numerical | LASSO | 1248 | - | 2015-7-16
+el4_1 | Mus musculus | EL4 | See [Doench et al.][1] | numerical | LASSO | 858 | - | 2015-7-16
+mesc_1 | Mus musculus | mESC | OTF Ratio | numerical | LASSO | 99 | [ERP003292][2] | 2015-7-16
+rn2c_1 | Mus musculus | RN2c | OTF Ratio | numerical | LASSO | 26 | [SRP057117][3] | 2015-7-16
+hela_1 | Homo sapiens | Hela | OTF Ratio | numerical | LASSO | 68 | [SRP042061][4] | 2015-7-16
+dr_1 | Danio rerio | *AB/Tu | OTF Ratio | numerical | LASSO | 47 | [SRP052749][5] | 2015-7-16
+hl60_nonribo | Homo sapiens | HL60 | See [Xu et al.][6] | categorical|Logistic |  908 | - | 2015-7-16
+hl60_ribo | Homo sapiens | HL60 | See [Xu et al.][6] | categorical| Logistic |  373 | - | 2015-7-16
+mesc_2 | Mus musculus | mESC | See [Xu et al.][6] | categorical | Logistic |  1028 | - | 2015-7-16
+hek293t_1 | Homo sapiens | HEK293T | See [Chari et al.][7] | categorical| Logistic | 279 | - | 2015-7-23
 
 [1]: http://www.nature.com/nbt/journal/v32/n12/full/nbt.3026.html
 
